@@ -8,5 +8,13 @@
 		<meta name="viewport" content="width=device-width, user-scalable=no" />
 	</head>
 	<body>
+		<a href="filter.php">Filter</a> <br />
+		<a href="help.php">Help</a> <br />
+		<a href="map.php">Map</a> <br />
+		<a href="specificBathroom.php">Specific Bathroom 1</a> <br />
+		<a href="specificBathroom.php">Specific Bathroom 2</a> <br />
+		<a href="specificBathroom.php">Specific Bathroom 3</a> <br />
+		<a href="specificBathroom.php">Specific Bathroom 4</a> <br />
+		<a href="specificBathroom.php">Specific Bathroom 5</a> <br />
 	</body>
 </html>

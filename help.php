@@ -8,5 +8,10 @@
 		<meta name="viewport" content="width=device-width, user-scalable=no" />
 	</head>
 	<body>
+		<a href="filter.php">Cancel (Filter)</a> <br />
+		<a href="map.php">Cancel (Map)</a> <br />
+		<a href="list.php">Cancel (List)</a> <br />
+		<a href="specificBathroom.php">Cancel (Specific Bathroom)</a> <br />
+		<p> The cancel that we use will depend on the page that was prior to this one. </p>
 	</body>
 </html>
