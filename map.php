@@ -2,11 +2,7 @@
 <html>
 	<head>
 		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-		<style type="text/css">
-			html { height: 100% }
-			body { height: 100%; margin: 0; padding: 0 }
-			#map_canvas { height: 100% }
-		</style>
+		<link rel="stylesheet" type="text/css" href="styles.css">
 		
 		<?php
 			require("google_maps_config.php");
@@ -63,16 +59,16 @@
 		</script>
 	</head>
 	<body onload="initialize()">
+		
 		<div id="search-panel">
 			<a href="filter.php"><button type="button">Filter</button></a>
 			<input id="target" type="text" placeholder="Search Box" autocomplete="off">
 			<a href="list.php"><button type="button">List</button></a>
-			
 		</div>
-		<div id="map_canvas" style="width:100%; height:95%"></div>
-		<div style="position:absolute; top:95%; height:5%; width:100%; background-color:white; text-align:right; padding:0px 0px 20px 0px">
-			<a href="specificBathroom.php">Specific Bathroom</a>
-			<a style="margin:0px 20px 0px 0px;" href="help.php">Help</a>
-		</div>
+
+		<div id="map_canvas"></div>
+		<?php
+			require("footer.php");
+		?>
 	</body>
 </html>
