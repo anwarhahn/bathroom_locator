@@ -7,9 +7,11 @@
 			body { height: 100%; margin: 0; padding: 0 }
 			#map_canvas { height: 100% }
 		</style>
-		<script type="text/javascript"
-			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZV1coyNyq2VQa11gXX6-DnysPyh1HN6M&libraries=places&sensor=false">
-		</script>
+		
+		<?php
+			require("google_maps_config.php");
+		?>
+
 		<script type="text/javascript">
 			function initialize() {
 				var stanfordLatLng = new google.maps.LatLng(37.428729,-122.171329);
