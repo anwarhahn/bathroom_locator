@@ -1,0 +1,11 @@
+INSERT INTO bathrooms VALUES("Arrillaga Dining", "489 Arguello Way, Stanford University, Stanford, CA 94305", 37.425278, -122.163926, TRUE, TRUE, null, null, null);
+INSERT INTO bathrooms VALUES("Meyer Library",	"Stanford University, 560 Escondido Mall, Stanford, CA 94305", 37.425534, -122.167595, null, null, null, null, null);
+INSERT INTO bathrooms VALUES("Tresidder", null, 37.425389, -122.171791, TRUE, TRUE, TRUE, FALSE, null);
+INSERT INTO bathrooms VALUES("School of Education", null, 37.42607, -122.168153, null, null, null, null, null);
+INSERT INTO bathrooms VALUES("Sweet Hall", "Stanford University, 590 Escondido Mall, Stanford, CA 94305", 37.425108, -122.166704, null, null, null, null, null);
+INSERT INTO bathrooms VALUES("Law Library", null, 37.424119, -122.168271, null, null, null, null, null);
+INSERT INTO bathrooms VALUES("Old Union", "Stanford University, 520 Lasuen Mall, Stanford, CA", 37.425284, -122.170681, TRUE, TRUE, TRUE, FALSE, "At the back of the building.  Men's bathroom, women's bathroom, and two gender-neutral single-stall bathrooms");
+INSERT INTO bathrooms VALUES("Bookstore",	"Stanford University, 519 Lasuen Mall, Stanford, CA", 37.425029, -122.168728, TRUE, TRUE, TRUE, null, "on the second floor, next to the cafe");
+INSERT INTO bathrooms VALUES("Moaning Myrtle Bathroom", null, 37.426999, -122.171022, FALSE, TRUE, FALSE, null, "underground");		
+INSERT INTO bathrooms VALUES("Underground Male Bathroom", null, 37.426667, -122.169611, TRUE, FALSE, FALSE, null, "underground");
+INSERT INTO bathrooms VALUES("d.School", null, 37.425838, -122.171866, TRUE, TRUE, TRUE, null, null);

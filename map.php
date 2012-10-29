@@ -11,18 +11,40 @@
 			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZV1coyNyq2VQa11gXX6-DnysPyh1HN6M&libraries=places&sensor=false">
 		</script>
 		<script type="text/javascript">
-			function initialize() {
+			function success(position) { 
+				var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+			  	var myOptions = {
+			    	zoom: 15,
+			    	center: latlng,
+				    mapTypeId: google.maps.MapTypeId.ROADMAP
+				};
+				createMap(myOptions, latlng);
+			}
+				
+			function notsuccess() {
 				var stanfordLatLng = new google.maps.LatLng(37.428729,-122.171329);
 				var mapOptions = {
 					center: stanfordLatLng,
 					zoom: 15,
 					mapTypeId: google.maps.MapTypeId.ROADMAP
 				};
+				createMap(mapOptions, null);
+			}
+
+			function createMap(options, knownlocation){
 				var map = new google.maps.Map(document.getElementById("map_canvas"),
-						mapOptions);
+						options);
 
 				var service = new google.maps.places.PlacesService(map);
 				var markers = [];
+
+				if(knownlocation!=null){
+					var marker = new google.maps.Marker({
+			    	position: knownlocation, 
+			      	map: map, 
+			      	title:"You are here!"
+			  	});
+				}
 
 				function callback(places, status) {
 					if(status == google.maps.places.PlacesServiceStatus.OK) {
@@ -58,9 +80,18 @@
 					query(input.value);
 				}
 			}
+
+			function loadMap(){
+				if (navigator.geolocation) {
+					navigator.geolocation.getCurrentPosition(success, notsuccess);
+				} else {
+					notsuccess();
+				}
+			}
+			
 		</script>
 	</head>
-	<body onload="initialize()">
+	<body onload="loadMap()">
 		<div id="search-panel">
 			<a href="filter.php"><button type="button">Filter</button></a>
 			<input id="target" type="text" placeholder="Search Box" autocomplete="off">
