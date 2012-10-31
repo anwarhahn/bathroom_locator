@@ -2,15 +2,10 @@
 <html>	
 	<head>
 		<title>Filter</title>
-		<link rel="apple-touch-icon" href="appicon.png" />
-		<link rel="apple-touch-startup-image" href="startup.png">
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-webapp-status-bar-style" content="black">
-		<meta name="viewport" content="width=device-width, user-scalable=no" />
-		<link rel="stylesheet" href="jquery.mobile-1.2.0.css" />
 
-		<script src="jquery-1.8.2.js"></script>
-		<script src="jquery.mobile-1.2.0.js"></script>
+		<?php
+			require("header.php");
+		?>
 	
 	</head>
 	<body>
@@ -21,8 +16,16 @@
 				<h1>Filter</h1>
 			</div>
 			<div data-role="content">
-				<a href="map.php">Cancel(map)</a> <br />
-				<a href="list.php">Cancel(list)</a> <br />
+				<script type="text/javascript">
+					var params = get_params();
+					if (params.origin == 'map') {
+						document.write("<a href='map.php'>Cancel</a>");
+					}
+					else if (params.origin == 'list') {
+						document.write("<a href='list.php'>Cancel</a>");
+					}
+				</script>
+				 <br />
 				<p> The cancel that we use will depend on the page that was prior to this one. </p>
 				<a href="help.php">Help</a> <br />
 				<a href="map.php">Search(map)</a> <br />

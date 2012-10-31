@@ -28,19 +28,19 @@ MarkerManager.prototype.addMarker = function(latLng, name)
 						position: latLng,
 						visible: true,
 						clickable: true
-						//icon: 'swirl.jpg'
 						});
 	var popup = function() {
 		var button = document.createElement("button");
 		button.innerHTML = ">";
 		button.onclick = function(evt) {
-			window.location = "/specificBathroom.php?name=" + escape(name);
+			var query = ["name=" + escape(name), "origin=" + escape("map")];
+
+			window.location = "../../pages/specificBathroom.php?" + query.toString().replace(',', '&');
 		}
 		var p = document.createElement("p");
 		p.innerHTML = name + " ";
 		p.appendChild(button);
 		var infoWindowOptions = {
-			//pixelOffset: google.maps.Size(0, -10),
 			content: p
 		}
 		var infoWindow = new google.maps.InfoWindow(infoWindowOptions);

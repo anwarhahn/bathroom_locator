@@ -1,6 +1,7 @@
 <?php
-require_once('google_maps_config.php');
-require("config.php");
+require_once('../config/google_maps_config.php');
+require("../config/config.php");
+
 class Data {
 	private $keys = array();
 	private $array = array();

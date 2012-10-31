@@ -6,7 +6,7 @@
 		?>
 	</head>
 	<body>
-		<a href="filter.php">Filter</a> <br />
+		<a href="filter.php?origin=list">Filter</a> <br />
 		<a href="help.php">Help</a> <br />
 		<a href="map.php">Map</a> <br />
 		<a href="specificBathroom.php">Specific Bathroom 1</a> <br />
@@ -16,7 +16,7 @@
 		<a href="specificBathroom.php">Specific Bathroom 5</a> <br />
 
 		<?php
-		include("data.php");
+		include("../db/data.php");
 		$db = new Data();
 		$filtered = $db->filter(array("name", "latitude", "longitude"));
 		echo "<p>".$db->stringify($filtered)."</p>";
