@@ -1,11 +1,13 @@
 <?php
-	echo "<link rel='apple-touch-icon' href='appicon.png' />";
+	$asset_path = "../assets/";
+
+	echo "<link rel='apple-touch-icon' href='".$asset_path."/images/appicon.png' />";
 	echo "<link rel='apple-touch-startup-image' href='startup.png'>";
 	echo "<meta name='apple-mobile-web-app-capable' content='yes'>";
 	echo "<meta name='apple-mobile-webapp-status-bar-style' content='black'>";
 	echo "<meta name='viewport' content='width=device-width, user-scalable=no' />";
 
-	$asset_path = "../assets/";
+	
 	$javascript_path = $asset_path."/javascript/";
 
 	echo "<link rel='stylesheet' type='text/css' href='../assets/stylesheets/styles.css'>";
