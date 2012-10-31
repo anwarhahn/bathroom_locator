@@ -18,11 +18,11 @@
 			<div data-role="content">
 				<script type="text/javascript">
 					var params = get_params();
-					if (params.origin == 'map') {
-						document.write("<a href='map.php'>Cancel</a>");
-					}
-					else if (params.origin == 'list') {
+					if (params.origin == 'list') {
 						document.write("<a href='list.php'>Cancel</a>");
+					}
+					else {
+						document.write("<a href='map.php'>Cancel</a>");
 					}
 				</script>
 				 <br />
