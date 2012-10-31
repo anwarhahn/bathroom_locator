@@ -6,7 +6,6 @@
 			require("header.php");
 		?>
 		<script src="markers.js"></script>
-		<script src="bathroomService.js"></script>
 		<?php
 		include("data.php");
 		$db = new Data();
@@ -14,43 +13,23 @@
 		?>
 
 		<script type="text/javascript">
-			function success(position) { 
-				var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-			  	var myOptions = {
-			    	zoom: 15,
-			    	center: latlng,
-				    mapTypeId: google.maps.MapTypeId.ROADMAP
-				};
-				createMap(myOptions, latlng);
-			}
-				
-			function notsuccess() {
+			function initialize() {
 				var stanfordLatLng = new google.maps.LatLng(37.428729,-122.171329);
 				var mapOptions = {
 					center: stanfordLatLng,
 					zoom: 15,
 					mapTypeId: google.maps.MapTypeId.ROADMAP
 				};
-				createMap(mapOptions, null);
-			}
-
-			function createMap(options, knownlocation){
 				var map = new google.maps.Map(document.getElementById("map_canvas"),
-						options);
+						mapOptions);
 
 				var manager = new MarkerManager(map);
 				var json = <?= $data; ?>;
 				manager.addMarkersFromJSON(json);
-				
 
-				var service = new BathroomService(manager);
-				if(knownlocation!=null){
-					var marker = new google.maps.Marker({
-			    	position: knownlocation, 
-			      	map: map, 
-			      	title:"You are here!"
-			  	});
-				}
+				var service = new google.maps.places.PlacesService(map);
+				var markers = [];
+
 
 				function callback(places, status) {
 					if(status == google.maps.places.PlacesServiceStatus.OK) {
@@ -67,33 +46,33 @@
 					}
 				}
 
-				var input = document.getElementById('target');
-				input.onchange = function(evt) {
+				function query(value) {
 					var request = {
 						location: stanfordLatLng,
-						query: input.value,
+						query: value,
 						radius: 1000
 					}
-					service.textSearch(request);
-				}
-			}
+					for (var i = markers.length - 1; i >= 0; i--) {
+						var marker = markers[i];
+						marker.setMap(null);
+						markers.splice(i,i);
+					}
+					service.textSearch(request, callback);
+				};
 
-			function loadMap(){
-				if (navigator.geolocation) {
-					navigator.geolocation.getCurrentPosition(success, notsuccess);
-				} else {
-					notsuccess();
+				var input = document.getElementById('target');
+				input.onchange = function(evt) {
+					query(input.value);
 				}
 			}
-			
 		</script>
 	</head>
-	<body onload="loadMap()">
+	<body onload="initialize()">
+
 		<div id="search-panel">
 			<a href="filter.php"><button type="button">Filter</button></a>
 			<input id="target" type="text" placeholder="Search Box" autocomplete="off">
 			<a href="list.php"><button type="button">List</button></a>
-			
 		</div>
 
 		<div id="map_canvas"></div>

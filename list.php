@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html>	
 	<head>
-		<link rel="apple-touch-icon" href="appicon.png" />
-		<link rel="apple-touch-startup-image" href="startup.png">
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-webapp-status-bar-style" content="black">
-		<meta name="viewport" content="width=device-width, user-scalable=no" />
+		<?php
+			require("header.php");
+		?>
 	</head>
 	<body>
 		<a href="filter.php">Filter</a> <br />
@@ -16,5 +14,28 @@
 		<a href="specificBathroom.php">Specific Bathroom 3</a> <br />
 		<a href="specificBathroom.php">Specific Bathroom 4</a> <br />
 		<a href="specificBathroom.php">Specific Bathroom 5</a> <br />
+
+		<?php
+		include("data.php");
+		$db = new Data();
+		$filtered = $db->filter(array("name", "latitude", "longitude"));
+		echo "<p>".$db->stringify($filtered)."</p>";
+		$data = $db->all_json($filtered);
+		?>
+		<script type='text/javascript'>
+			var b = <?= $data; ?>;
+			var stanfordLatLng = new google.maps.LatLng(37.428729,-122.171329);
+			var div = document.createElement("div");
+			document.body.appendChild(div);
+			for(var i in b) {
+				var bathroom = b[i];
+				var loc = new google.maps.LatLng(bathroom.latitude, bathroom.longitude);
+				var dist = google.maps.geometry.spherical.computeDistanceBetween(stanfordLatLng, loc);
+				var p = document.createElement("p");
+				div.appendChild(p);
+				p.innerHTML = bathroom.name + " " +dist;
+			}
+		</script>
+
 	</body>
 </html>
