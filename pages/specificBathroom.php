@@ -6,8 +6,19 @@
 		?>
 	</head>
 	<body>
-		<a href="list.php">Back(list)</a> <br />
-		<a href="map.php">Back(map)</a> <br />
+		<div data-role="page">
+			<div data-role="header">
+				<h1>Bathroom</h1>
+			</div>
+
+		<div data-role="content">
+		
+			<script type="text/javascript">
+				var params = get_params();
+				document.write("<a href='" + params.origin + ".php'>Back</a>");
+			</script>
+
+
 		<a href="help.php">Help</a> <br />
 		<a href="map.php">Show on Map</a> <br />
 	</body>

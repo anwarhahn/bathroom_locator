@@ -26,7 +26,7 @@
 					}
 				</script>
 				 <br />
-				<a href="help.php">Help</a> <br />
+				<a href="help.php?origin=filter">Help</a> <br />
 
 
 			<form id="filter_form" action='' method='get'>
