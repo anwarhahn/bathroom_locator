@@ -29,7 +29,7 @@
 				<a href="help.php">Help</a> <br />
 
 
-			<form id="filter_form" action='' method='get'>
+			<form id="filter_form" action='map.php' method='get'>
 				<div data-role="fieldcontain">
 		    		<fieldset data-role="options" data-type="horizontal">
 				  		<input type="checkbox" name="Male" id="checkbox-1" class="custom" />
@@ -47,13 +47,9 @@
 		   	</form>
 
 		   	<script type="text/javascript">
-			var params = get_params();
-			var form = document.getElementById("filter_form");
-			
-			form.action = params.origin + ".php";
-			console.log(form.action);
+				var form = document.getElementById("filter_form");
+				//form.action = params.origin + ".php";
 			</script>
-
 		   	</div>
 	   	</div>
 </div>
