@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>	
 	<head>
-		<title>Filter</title>
+		<title>Flush | Filter</title>
 
 		<?php
 			require("header.php");
@@ -16,17 +16,23 @@
 				<h1>Filter</h1>
 			</div>
 			<div data-role="content">
+				<a data-role="button" id="cancel_link">Cancel</a> <br />
+				<a data-role="button" id="help_link">Help</a> <br />
+
 				<script type="text/javascript">
-					var params = get_params();
+				var params = get_params();
+				$("#cancel_link").click(function() {
 					if (params.origin == 'list') {
-						document.write("<a href='list.php'>Cancel</a>");
+						window.location = "list.php";	
 					}
-					else {
-						document.write("<a href='map.php'>Cancel</a>");
-					}
+					else window.location = "map.php";
+				});
+
+				$("#help_link").click(function() {
+					window.location = "help.php?origin=filter";
+				});
 				</script>
-				 <br />
-				<a href="help.php">Help</a> <br />
+				
 
 
 			<form id="filter_form" action='map.php' method='get'>

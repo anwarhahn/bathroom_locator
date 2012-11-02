@@ -1,21 +1,36 @@
 <!DOCTYPE html>
 <html>	
 	<head>
+		<title>Flush | List</title>
 		<?php
 			require("header.php");
 		?>
+
 	</head>
 	<body>
-		<a href="filter.php?origin=list">Filter</a> <br />
-		<a href="help.php?origin=list">Help</a> <br />
-		<a href="map.php">Map</a> <br />
+		<a data-role="button" id="filter_link">Filter</a> <br />
+		<a data-role="button" id="help_link">Help</a> <br />
+		<a data-role="button" id="map_link">Map</a> <br />
 
+
+		<script type="text/javascript">
+		$("#filter_link").click(function() {
+			window.location = "filter.php?origin=list";
+		});
+		$("#help_link").click(function() {
+			window.location = "help.php?origin=list";
+		});
+		$("#map_link").click(function() {
+			window.location = "map.php";
+		});
+
+		</script>
 
 		<?php
 		include("../db/data.php");
 		$db = new Data();
 		$filtered = $db->filter(array("name", "latitude", "longitude"));
-		echo "<p>".$db->stringify($filtered)."</p>";
+//		echo "<p>".$db->stringify($filtered)."</p>";
 		$data = $db->all_json($filtered);
 		?>
 
@@ -34,9 +49,16 @@
 				var dist = google.maps.geometry.spherical.computeDistanceBetween(stanfordLatLng, loc);
 				var l = document.getElementById("list");
 				var li = document.createElement("li");
-				li.innerHTML = "<a href='specificBathroom.php?origin=list'>" + bathroom.name + "</a>"
+				var a = document.createElement("a");
+				a.innerHTML = bathroom.name;
+				var id = bathroom.name.replace(/ /g, "_");
+				a.id = id
+				li.appendChild(a);
 				l.appendChild(li);
 
+				$("#"+id).click(function() {
+					window.location = "specificBathroom.php?origin=list&name=" + bathroom.name;
+				});
 			}
 		</script>
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>	
 	<head>
-		<title>Help</title>
+		<title>Flush | Help</title>
 
 		<?php
 			require("header.php");
@@ -19,7 +19,6 @@
 			<script type="text/javascript">
 				var params = get_params();
 				document.write("<a href='" + params.origin + ".php'>Cancel</a>");
-				
 			</script>
 				<p>Welcome to [NAME OF APP HERE]!  It's our goal to make it as easy as possible for you to find bathrooms, when and where you need them.</p>
 				<h2>From the map view:</h2>

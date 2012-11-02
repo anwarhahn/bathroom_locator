@@ -4,6 +4,12 @@
 		<?php
 			require("header.php");
 		?>
+
+		<title id="title"></title>
+		<script type="text/javascript">
+			var params = get_params();
+			$("#title").innerHTML = "Flush | " + params.name;
+		</script>
 	</head>
 	<body>
 		<div data-role="page">
