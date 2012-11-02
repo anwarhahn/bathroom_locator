@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<title>Flush | Map</title>
 		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />		
 		<?php
 			require("header.php");
@@ -123,9 +124,14 @@
 			</div>
 
 			<div data-role="content" id="map_canvas"></div>
-			<?php
-				require("footer.php");
-			?>
+			<a id="help_link" href="help.php">Help</a>
+
+			<script type="text/javascript">
+			$("#help_link").click(function() {
+				window.location = "help.php?origin=map";
+			});
+			</script>
+
 		</div>
 	</body>
 </html>
