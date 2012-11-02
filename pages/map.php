@@ -90,16 +90,26 @@
 		</script>
 	</head>
 	<body onload="loadMap()">
-		<div id="search-panel">
-			<a href="filter.php?origin=map"><button type="button">Filter</button></a>
-			<input id="target" type="text" placeholder="Search Box" autocomplete="off">
-			<a href="list.php"><button type="button">List</button></a>
-			
-		</div>
+		<div data-role="page" data-title="Map">
+			<div data-role="header" id="search-panel">
+				<div data-role="controlgroup">
+					<a href="filter.php?origin=map"><button type="button">Filter</button></a>
+					<input id="target" type="text" placeholder="Search Box" autocomplete="off">
+					<button id="target_button" type="button">Search</button>
+					<script type="text/javascript">
+					var button = document.getElementById("target_button");
+					button.onclick = function(evt) {
+						
+					}
+					</script>
+					<a href="list.php"><button type="button">List</button></a>			
+				</div>
+			</div>
 
-		<div id="map_canvas"></div>
-		<?php
-			require("footer.php");
-		?>
+			<div data-role="content" id="map_canvas"></div>
+			<?php
+				require("footer.php");
+			?>
+		</div>
 	</body>
 </html>
