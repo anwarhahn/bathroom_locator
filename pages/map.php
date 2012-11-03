@@ -94,11 +94,10 @@
 	<body onload="loadMap()">
 		<div data-role="page" data-title="Map">
 			<div data-role="header" id="search-panel">
-				<div data-role="fieldcontain">
-					<a href="list.php" data-inline="true" data-role="button">List</a>
-					<input data-mini="true" id="target" type="search" placeholder="Search Box" autocomplete="off">
-					
-					<a href="filter.php?origin=map" data-inline="true" data-role="button">Filter</a>
+				<div class="ui-grid-b">
+					<div class="ui-block-a"><a href="list.php" data-inline="true" data-role="button">List</a></div>
+					<div class="ui-block-b"><input data-mini="true" id="target" type="search" placeholder="Search Box" autocomplete="off"></div>
+					<div class="ui-block-c"><a href="filter.php?origin=map" data-inline="true" data-role="button">Filter</a></div>
 				</div>
 			</div>
 

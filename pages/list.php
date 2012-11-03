@@ -31,7 +31,6 @@
 					})(bathroom.name));
 			}
 		
-			console.log("making that list");
 			$(document).bind('pageinit', function(event) {
 				var ul = $("<ul>");
 				$("#home").append(ul);
@@ -41,23 +40,22 @@
 
 
 		<div data-role="page" id="home">
-			<div data-role="controlgroup" data-type="horizontal">
-				<a data-role="button" id="filter_link">Filter</a>
-				<a data-role="button" id="help_link">Help</a>
-				<a data-role="button" id="map_link">Map</a>
-			</div>
+			<div data-role="header">
+				
+				<div class="ui-grid-a">
+					<div class="ui-block-a">
+						<a href="map.php" data-mini="true" data-inline="true" data-role="button">Map</a>
+						Bathrooms
+					</div>
 
-			<script type="text/javascript">
-				$("#filter_link").click(function() {
-					window.location = "filter.php?origin=list";
-				});
-				$("#help_link").click(function() {
-					window.location = "help.php?origin=list";
-				});
-				$("#map_link").click(function() {
-					window.location = "map.php";
-				});
-			</script>
+					<div class="ui-block-b">
+						<div data-role="controlgroup" data-type="horizontal">
+							<a href="filter.php?origin=list" data-mini="true" data-inline="true" data-role="button">Filter</a>
+							<a href="help.php?origin=list" data-mini="true" data-inline="true" data-role="button">Help</a>
+						</div>
+					</div>
+				</div>
+			</div>
 
 			<div data-role="content">
 				<ul  data-inset="true" data-split-icon="arrow-r" data-split-theme="a" id="bathroom_list">
