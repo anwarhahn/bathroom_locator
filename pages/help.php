@@ -12,7 +12,14 @@
 		<div data-role="page" id="home">
 			<script type="text/javascript">
 				$('#home').live('pageinit', function(event) {
-					$("#cancel_link").attr("href", get_params().origin + ".php");
+					var params = get_params();
+					if (params.escaped) {
+						params.origin = unescape(params.origin);
+						$("#cancel_link").attr("href", params.origin);
+					}
+					else {
+						$("#cancel_link").attr("href", params.origin + ".php");
+					}
 				});			
 			</script>
 			<div data-role="header">

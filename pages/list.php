@@ -28,7 +28,7 @@
 
 				$(a).click((function(name) {
 						return function() { window.location = "specificBathroom.php?origin=list&name=" + name; }
-					})(bathroom.name));
+					})(escape(bathroom.name)));
 			}
 		
 			$(document).bind('pageinit', function(event) {
