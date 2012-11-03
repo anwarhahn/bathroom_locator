@@ -95,23 +95,12 @@
 			<div data-role="header" id="search-panel">
 				<div data-role="controlgroup" data-type="horizontal">
 					<div data-role="fieldcontain">
-						<div class="ui-grid-a">
-							<div class="ui-block-a">
-								<input data-mini="true" id="target" type="search" placeholder="Search Box" autocomplete="off">
-							</div>
-							<div class="ui-block-b">
-								<a data-role="button" id="target_button" type="button">Search</a>
-								<a id="list_link" data-role="button">List</a>			
-								<a id="filter_link" data-role="button">Filter</a>
-							</div>
-						</div><!-- /grid-a -->
+						<input data-mini="true" id="target" type="search" placeholder="Search Box" autocomplete="off">
+						<br />
+						<a id="list_link" data-role="button">List</a>
+						<a id="filter_link" data-role="button">Filter</a>
 
 						<script type="text/javascript">
-						var button = document.getElementById("target_button");
-						button.onclick = function(evt) {
-
-						}
-
 						$("#filter_link").click(function() {
 							window.location = "filter.php?origin=map";
 						});
