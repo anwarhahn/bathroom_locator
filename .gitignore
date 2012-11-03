@@ -1,4 +1,5 @@
 *.o
+remotescript.sh
 jquery/*
 *.pyc
 

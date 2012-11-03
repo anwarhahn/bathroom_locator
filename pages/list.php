@@ -31,7 +31,8 @@
 					})(bathroom.name));
 			}
 		
-			$('#home').live('pageinit', function(event) {
+			console.log("making that list");
+			$(document).bind('pageinit', function(event) {
 				var ul = $("<ul>");
 				$("#home").append(ul);
 				$("#bathroom_list").append(list).listview();

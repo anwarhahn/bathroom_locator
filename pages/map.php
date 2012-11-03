@@ -69,7 +69,7 @@
 					}
 				}
 
-				var input = document.getElementById('target');
+				/*var input = document.getElementById('target');
 				input.onchange = function(evt) {
 					var request = {
 						location: stanfordLatLng,
@@ -78,6 +78,7 @@
 					}
 					service.textSearch(request);
 				}
+				*/
 			}
 
 			function loadMap(){
@@ -93,34 +94,16 @@
 	<body onload="loadMap()">
 		<div data-role="page" data-title="Map">
 			<div data-role="header" id="search-panel">
-				<div data-role="controlgroup" data-type="horizontal">
-					<div data-role="fieldcontain">
-						<input data-mini="true" id="target" type="search" placeholder="Search Box" autocomplete="off">
-						<br />
-						<a id="list_link" data-role="button">List</a>
-						<a id="filter_link" data-role="button">Filter</a>
-
-						<script type="text/javascript">
-						$("#filter_link").click(function() {
-							window.location = "filter.php?origin=map";
-						});
-						$("#list_link").click(function() {
-							window.location = "list.php";
-						});
-						</script>
-					</div>
+				<div data-role="fieldcontain">
+					<a href="list.php" data-inline="true" data-role="button">List</a>
+					<input data-mini="true" id="target" type="search" placeholder="Search Box" autocomplete="off">
+					
+					<a href="filter.php?origin=map" data-inline="true" data-role="button">Filter</a>
 				</div>
 			</div>
 
 			<div data-role="content" id="map_canvas"></div>
-			<a id="help_link" href="help.php">Help</a>
-
-			<script type="text/javascript">
-			$("#help_link").click(function() {
-				window.location = "help.php?origin=map";
-			});
-			</script>
-
+			<a href="help.php?origin=map">Help</a>
 		</div>
 	</body>
 </html>

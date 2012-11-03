@@ -14,30 +14,29 @@
 
 			<div data-role="header">
 				<h1>Filter</h1>
+				<a data-role="button" data-mini="true" data-inline="true" id="cancel_link">Cancel</a>
+				<a href="help.php?origin=filter" data-role="button" data-mini="true" data-inline="true">Help</a>
 			</div>
 			<div data-role="content">
-				<a data-role="button" id="cancel_link">Cancel</a> <br />
-				<a data-role="button" id="help_link">Help</a> <br />
+					
+
 
 				<script type="text/javascript">
 				var params = get_params();
-				$("#cancel_link").click(function() {
+				$("#cancel_link").attr("href", (function() {
 					if (params.origin == 'list') {
-						window.location = "list.php";	
+						return "list.php";	
 					}
-					else window.location = "map.php";
-				});
+					else return "map.php";
+				})());
 
-				$("#help_link").click(function() {
-					window.location = "help.php?origin=filter";
-				});
 				</script>
 				
 
 
 			<form id="filter_form" action='map.php' method='get'>
-				<div data-role="fieldcontain">
-		    		<fieldset data-role="options" data-type="horizontal">
+				<div data-role="controlgroup" data-type="horizontal">
+		    		<fieldset data-role="options">
 				  		<input type="checkbox" name="Male" id="checkbox-1" class="custom" />
 				   		<label for="checkbox-1">Male</label>
 				   		<input type="checkbox" name="Female" id="checkbox-2" class="custom" />

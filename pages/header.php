@@ -14,8 +14,9 @@
 	echo "<script src='".$javascript_path."util.js'></script>";
 
 	$jquery_path = $javascript_path."/jquery/";
-	echo "<link rel='stylesheet' href='".$jquery_path."jquery.mobile-1.2.0.css' />";
 	echo "<script src='".$jquery_path."jquery-1.8.2.js'></script>";
+	echo "<script src='".$jquery_path."disable_ajax.js'></script>";
+	echo "<link rel='stylesheet' href='".$jquery_path."jquery.mobile-1.2.0.css' />";
 	echo "<script src='".$jquery_path."jquery.mobile-1.2.0.js'></script>";
 		
 	require_once('../config/google_maps_config.php');
