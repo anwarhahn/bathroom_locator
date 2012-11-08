@@ -50,7 +50,7 @@
 			    	position: knownlocation, 
 			      	map: map, 
 			      	title:"You are here!",
-			      	icon: "../assets/images/28-star.png"
+			      	icon: "../assets/images/bathroom_pin_30x62.png"
 			  	});
 				}
 
