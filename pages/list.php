@@ -6,6 +6,7 @@
 			require("header.php");
 			include("../db/data.php");
 			$db = new Data();
+			$db->refresh_all();
 			$filtered = $db->filter(array("name", "latitude", "longitude"));
 			$data = $db->all_json($filtered);
 		?>

@@ -5,20 +5,28 @@ require("../config/config.php");
 class Data {
 	private $keys = array();
 	private $array = array();
+	private $table_name = "bathrooms";
+	private $query_all = "select * from bathrooms";
 	private $query = "select * from bathrooms";
 
 	function __construct() {
-		$this->refresh();
+		//do nothing
 	}
 
-	function refresh() {
-		$result = mysql_query($this->query);
-		$myarray = new ArrayObject();
-		while ($row = mysql_fetch_assoc($result)) {
-			$myarray->append($row);
+	function refresh($sql_query) {
+		$result = mysql_query(mysql_real_escape_string($sql_query));
+		if ($result) {
+			$myarray = new ArrayObject();
+			while ($row = mysql_fetch_assoc($result)) {
+				$myarray->append($row);
+			}
+			$this->keys = array_keys($myarray[0]);
+			$this->array = $myarray;
 		}
-		$this->keys = array_keys($myarray[0]);
-		$this->array = $myarray;
+	}
+
+	function refresh_all() {
+		$this->refresh($this->query_all);
 	}
 
 	function all() {
@@ -28,16 +36,6 @@ class Data {
 	function all_json($arr) {
 		if (!$arr) $arr = $this->array;
 		return json_encode($arr);
-	}
-
-	function stringify($arr) {
-		$output = "";
-		for($i = 0; $i < count($arr); $i++) {
-			$a = (array) $arr[$i];
-			$elem = "{".implode(", ", $a)."} ";
-			$output = $output.$elem;
-		}
-		return $output;
 	}
 
 	function filter($properties) {
@@ -52,6 +50,13 @@ class Data {
 			$return->append($subset);
 		}
 		return $return;
+	}
+
+	function find_by_id($id) {
+		$sql_query = "select * from bathrooms where bathroom_id={$id}";
+		#echo gettype($sql_query);
+		$this->refresh($sql_query);
+		return $this->array[0];
 	}
 }
 ?>

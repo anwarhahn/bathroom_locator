@@ -10,7 +10,7 @@ MarkerManager.prototype.addMarkersFromJSON = function(json)
 	for (var arrayPos in json) {
 		var elem = json[arrayPos];
 		var latLng = this.makeLatLng(elem.latitude, elem.longitude);
-		this.addMarker(latLng, elem.name);
+		this.addMarker(latLng, elem.name, elem.bathroom_id);
 	}
 }
 
@@ -19,7 +19,7 @@ MarkerManager.prototype.makeLatLng = function(latitude, longitude)
 	return new google.maps.LatLng(latitude, longitude);
 }
 
-MarkerManager.prototype.addMarker = function(latLng, name)
+MarkerManager.prototype.addMarker = function(latLng, name, id)
 {
 	var obj = this;
 	var marker = new google.maps.Marker({
@@ -33,9 +33,8 @@ MarkerManager.prototype.addMarker = function(latLng, name)
 		var button = document.createElement("button");
 		button.innerHTML = ">";
 		button.onclick = function(evt) {
-			var query = ["name=" + escape(name), "origin=" + escape("map")];
-
-			window.location = "../../pages/specificBathroom.php?" + query.toString().replace(',', '&');
+			var query = ["bathroom_id=" + escape(id), "origin=" + escape("map")];
+			window.location = "specificBathroom.php?" + query.toString().replace(',', '&');
 		}
 		var p = document.createElement("p");
 		p.innerHTML = name + " ";

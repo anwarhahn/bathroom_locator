@@ -11,7 +11,8 @@
 		<?php
 		include("../db/data.php");
 		$db = new Data();
-		$data = $db->all_json($db->filter(array("name", "latitude", "longitude")));
+		$db->refresh_all();
+		$data = $db->all_json($db->filter(array("name", "bathroom_id", "latitude", "longitude")));
 		?>
 
 		<script type="text/javascript">
@@ -41,6 +42,7 @@
 
 				var manager = new MarkerManager(map);
 				var json = <?= $data; ?>;
+				//console.log(json);
 				manager.addMarkersFromJSON(json);
 				
 

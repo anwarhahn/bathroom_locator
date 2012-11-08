@@ -16,13 +16,34 @@
 		<div data-role="page">
 			<div data-role="header">
 				<h1 id="h1_title"></h1>
+				<?php
+				include("../db/data.php");
+				$db = new Data();
+				$bathroom = $db->find_by_id($_GET["bathroom_id"]);
+				$data = $db->all_json($bathroom);
+				?>
 				<script type="text/javascript">
-					$("#h1_title").html(params.name);
+					var bathroom = <?= $data; ?>;
+					console.log(bathroom);
+					$("#h1_title").html(bathroom.name);
 				</script>
 			</div>
 
 		<div data-role="content">
-			<p>[Bathroom Address]</p>
+			<p>
+				<script type="text/javascript">
+				var address = bathroom.address.split(",");
+				//console.log(address);
+				var len = address.length;
+				address[len-2] = address[len-2] + address[len-1];
+				address.splice(len-1,1);
+				address = address.join("<br />");
+				
+				//console.log(address);
+			
+				document.write(address);
+				</script>
+			</p>
 			<p>[Bathroom Amenities]</p>
 		
 			<script type="text/javascript">
@@ -37,6 +58,6 @@
 		var returnURL = "help.php?escaped=1&origin="+origin;
 		$("#help_link").attr("href", returnURL);
 		</script>
-		<a href="map.php?show=">Show on Map</a>
+		<a href="map.php?show=<?= $bathroom['bathroom_id'] ?>">Show on Map</a>
 	</body>
 </html>
