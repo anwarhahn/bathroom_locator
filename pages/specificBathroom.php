@@ -4,11 +4,21 @@
 		<?php
 			require("header.php");
 		?>
+
+		<title id="title"></title>
+		<script type="text/javascript">
+			var params = get_params();
+			params.name = unescape(params.name);
+			$("#title").html("Flush | " + params.name);
+		</script>
 	</head>
 	<body>
 		<div data-role="page">
 			<div data-role="header">
-				<h1>[Bathroom Name]</h1>
+				<h1 id="h1_title"></h1>
+				<script type="text/javascript">
+					$("#h1_title").html(params.name);
+				</script>
 			</div>
 
 		<div data-role="content">
@@ -21,7 +31,12 @@
 			</script>
 
 
-		<a href="help.php">Help</a> <br />
-		<a href="map.php">Show on Map</a> <br />
+		<a id="help_link" href="help.php?origin=specificBathroom">Help</a>
+		<script type="text/javascript">
+		var origin = escape("specificBathroom.php?origin="+params.origin+"&name="+params.name);
+		var returnURL = "help.php?escaped=1&origin="+origin;
+		$("#help_link").attr("href", returnURL);
+		</script>
+		<a href="map.php?show=">Show on Map</a>
 	</body>
 </html>

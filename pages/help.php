@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>	
 	<head>
-		<title>Help</title>
+		<title>Flush | Help</title>
 
 		<?php
 			require("header.php");
@@ -9,18 +9,25 @@
 
 	</head>
 	<body>
-		<div data-role="page">
+		<div data-role="page" id="home">
+			<script type="text/javascript">
+				$('#home').live('pageinit', function(event) {
+					var params = get_params();
+					if (params.escaped) {
+						params.origin = unescape(params.origin);
+						$("#cancel_link").attr("href", params.origin);
+					}
+					else {
+						$("#cancel_link").attr("href", params.origin + ".php");
+					}
+				});			
+			</script>
 			<div data-role="header">
 				<h1>Help</h1>
+				<a data-role="button" data-mini="true" data-inline="true" id="cancel_link">Cancel</a>
 			</div>
 
-		<div data-role="content">
-		
-			<script type="text/javascript">
-				var params = get_params();
-				document.write("<a href='" + params.origin + ".php'>Cancel</a>");
-				
-			</script>
+			<div data-role="content">
 				<p>Welcome to [NAME OF APP HERE]!  It's our goal to make it as easy as possible for you to find bathrooms, when and where you need them.</p>
 				<h2>From the map view:</h2>
 				<p>The map will automatically find your location and display the bathrooms nearby on the map.  Click on them for more information.  Feel free to search for a new address or drag the map around.</p>
@@ -46,10 +53,7 @@
 						<td>Changing Table</td>
 					</tr>
 				</table>
-
 			</div>
-		</div>
-</div>
-		
+		</div>		
 	</body>
 </html>

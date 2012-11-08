@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>	
 	<head>
-		<title>Filter</title>
+		<title>Flush | Filter</title>
 
 		<?php
 			require("header.php");
@@ -14,24 +14,29 @@
 
 			<div data-role="header">
 				<h1>Filter</h1>
+				<a data-role="button" data-mini="true" data-inline="true" id="cancel_link">Cancel</a>
+				<a href="help.php?origin=filter" data-role="button" data-mini="true" data-inline="true">Help</a>
 			</div>
 			<div data-role="content">
+					
+
+
 				<script type="text/javascript">
-					var params = get_params();
+				var params = get_params();
+				$("#cancel_link").attr("href", (function() {
 					if (params.origin == 'list') {
-						document.write("<a href='list.php'>Cancel</a>");
+						return "list.php";	
 					}
-					else {
-						document.write("<a href='map.php'>Cancel</a>");
-					}
+					else return "map.php";
+				})());
+
 				</script>
-				 <br />
-				<a href="help.php?origin=filter">Help</a> <br />
+				
 
 
 			<form id="filter_form" action='map.php' method='get'>
-				<div data-role="fieldcontain">
-		    		<fieldset data-role="options" data-type="horizontal">
+				<div data-role="controlgroup" data-type="horizontal">
+		    		<fieldset data-role="options">
 				  		<input type="checkbox" name="Male" id="checkbox-1" class="custom" />
 				   		<label for="checkbox-1">Male</label>
 				   		<input type="checkbox" name="Female" id="checkbox-2" class="custom" />

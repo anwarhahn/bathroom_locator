@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<title>Flush | Map</title>
 		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />		
 		<?php
 			require("header.php");
@@ -49,7 +50,7 @@
 			    	position: knownlocation, 
 			      	map: map, 
 			      	title:"You are here!",
-			      	icon: "../assets/images/28-star.png"
+			      	icon: "../assets/images/bathroom_pin_30x62.png"
 			  	});
 				}
 
@@ -68,7 +69,7 @@
 					}
 				}
 
-				var input = document.getElementById('target');
+				/*var input = document.getElementById('target');
 				input.onchange = function(evt) {
 					var request = {
 						location: stanfordLatLng,
@@ -77,6 +78,7 @@
 					}
 					service.textSearch(request);
 				}
+				*/
 			}
 
 			function loadMap(){
@@ -92,40 +94,15 @@
 	<body onload="loadMap()">
 		<div data-role="page" data-title="Map">
 			<div data-role="header" id="search-panel">
-				<div data-role="controlgroup" data-type="horizontal">
-					<div data-role="fieldcontain">
-						<div class="ui-grid-a">
-							<div class="ui-block-a">
-								<input data-mini="true" id="target" type="search" placeholder="Search Box" autocomplete="off">
-							</div>
-							<div class="ui-block-b">
-								<a data-role="button" id="target_button" type="button">Search</a>
-								<a id="list_link" data-role="button">List</a>			
-								<a id="filter_link" data-role="button">Filter</a>
-							</div>
-						</div><!-- /grid-a -->
-
-						<script type="text/javascript">
-						var button = document.getElementById("target_button");
-						button.onclick = function(evt) {
-
-						}
-
-						$("#filter_link").click(function() {
-							window.location = "filter.php?origin=map";
-						});
-						$("#list_link").click(function() {
-							window.location = "list.php";
-						});
-						</script>
-					</div>
+				<div class="ui-grid-b">
+					<div class="ui-block-a"><a href="list.php" data-inline="true" data-role="button">List</a></div>
+					<div class="ui-block-b"><input data-mini="true" id="target" type="search" placeholder="Search Box" autocomplete="off"></div>
+					<div class="ui-block-c"><a href="filter.php?origin=map" data-inline="true" data-role="button">Filter</a></div>
 				</div>
 			</div>
 
 			<div data-role="content" id="map_canvas"></div>
-			<?php
-				require("footer.php");
-			?>
+			<a href="help.php?origin=map">Help</a>
 		</div>
 	</body>
 </html>
