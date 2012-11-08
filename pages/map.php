@@ -34,7 +34,7 @@
 				createMap(mapOptions, null);
 			}
 
-			function createMap(options, knownlocation){
+			function createMap(options, knownlocation) {
 				var map = new google.maps.Map(document.getElementById("map_canvas"),
 						options);
 
@@ -92,17 +92,33 @@
 	<body onload="loadMap()">
 		<div data-role="page" data-title="Map">
 			<div data-role="header" id="search-panel">
-				<div data-role="controlgroup">
-					<a href="filter.php?origin=map"><button type="button">Filter</button></a>
-					<input id="target" type="text" placeholder="Search Box" autocomplete="off">
-					<button id="target_button" type="button">Search</button>
-					<script type="text/javascript">
-					var button = document.getElementById("target_button");
-					button.onclick = function(evt) {
-						
-					}
-					</script>
-					<a href="list.php"><button type="button">List</button></a>			
+				<div data-role="controlgroup" data-type="horizontal">
+					<div data-role="fieldcontain">
+						<div class="ui-grid-a">
+							<div class="ui-block-a">
+								<input data-mini="true" id="target" type="search" placeholder="Search Box" autocomplete="off">
+							</div>
+							<div class="ui-block-b">
+								<a data-role="button" id="target_button" type="button">Search</a>
+								<a id="list_link" data-role="button">List</a>			
+								<a id="filter_link" data-role="button">Filter</a>
+							</div>
+						</div><!-- /grid-a -->
+
+						<script type="text/javascript">
+						var button = document.getElementById("target_button");
+						button.onclick = function(evt) {
+
+						}
+
+						$("#filter_link").click(function() {
+							window.location = "filter.php?origin=map";
+						});
+						$("#list_link").click(function() {
+							window.location = "list.php";
+						});
+						</script>
+					</div>
 				</div>
 			</div>
 
