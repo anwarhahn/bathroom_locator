@@ -13,12 +13,12 @@
 			<script type="text/javascript">
 				$('#home').live('pageinit', function(event) {
 					var params = get_params();
-					if (params.escaped) {
-						params.origin = unescape(params.origin);
-						$("#cancel_link").attr("href", params.origin);
+					if (params.originParams) {
+						params.originParams = unescape(params.originParams);
+						$("#cancel_link").attr("href", params.origin + ".php" + params.originParams);
 					}
 					else {
-						$("#cancel_link").attr("href", params.origin + ".php");
+						$("#cancel_link").attr("href", params.origin + ".php" + query_string(old_params(), {}));
 					}
 				});			
 			</script>

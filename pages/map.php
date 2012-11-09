@@ -12,7 +12,8 @@
 		include("../db/data.php");
 		$db = new Data();
 		$db->refresh_all();
-		$data = $db->all_json($db->filter(array("name", "bathroom_id", "latitude", "longitude")));
+		#$data = $db->all_json($db->filter(array("name", "bathroom_id", "latitude", "longitude")));
+		$data = $db->all_json();
 		?>
 
 		<script type="text/javascript">
@@ -43,6 +44,20 @@
 				var manager = new MarkerManager(map);
 				var json = <?= $data; ?>;
 				//console.log(json);
+				var filterHash = filter_from_params();
+				var params = get_params();
+
+				for(var i in json) {
+					var bathroom = json[i];
+					if (!matches_filter_requirements(filterHash, bathroom)) 
+						delete json[i];
+					if (params.show == 1) {
+						if (params.bathroom_id != bathroom.bathroom_id)
+							delete json[i];
+						else map.panTo(new google.maps.LatLng(bathroom.latitude, bathroom.longitude));
+					} 
+				}
+
 				manager.addMarkersFromJSON(json);
 				
 
@@ -54,7 +69,7 @@
 			      	title:"You are here!",
 			      	icon: "../assets/images/bathroom_pin_30x62.png"
 			  	});
-				}
+			}
 
 				function callback(places, status) {
 					if(status == google.maps.places.PlacesServiceStatus.OK) {
@@ -97,14 +112,23 @@
 		<div data-role="page" data-title="Map">
 			<div data-role="header" id="search-panel">
 				<div class="ui-grid-b">
-					<div class="ui-block-a"><a href="list.php" data-inline="true" data-role="button">List</a></div>
+					<div class="ui-block-a"><a id="list_link" href="list.php" data-inline="true" data-role="button">List</a></div>
 					<div class="ui-block-b"><input data-mini="true" id="target" type="search" placeholder="Search Box" autocomplete="off"></div>
-					<div class="ui-block-c"><a href="filter.php?origin=map" data-inline="true" data-role="button">Filter</a></div>
+					<div class="ui-block-c"><a id="filter_link" href="filter.php?origin=map" data-inline="true" data-role="button">Filter</a></div>
+					<script type="text/javascript">
+					var filterLink = document.getElementById("filter_link");
+					var listLink = document.getElementById("list_link");
+					filterLink.href = "filter.php" + query_string(old_params(), {origin:"map"});
+					listLink.href = "list.php" + query_string(old_params(), {});
+					</script>
 				</div>
 			</div>
 
 			<div data-role="content" id="map_canvas"></div>
-			<a href="help.php?origin=map">Help</a>
+			<a id="help_link" href="help.php?origin=map">Help</a>
+			<script type="text/javascript">
+			$("#help_link").attr("href", "help.php" + query_string(old_params(), {origin:"map"}));
+			</script>
 		</div>
 	</body>
 </html>

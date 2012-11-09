@@ -7,8 +7,9 @@
 			include("../db/data.php");
 			$db = new Data();
 			$db->refresh_all();
-			$filtered = $db->filter(array("name", "latitude", "longitude"));
-			$data = $db->all_json($filtered);
+			#$filtered = $db->filter(array("name", "latitude", "longitude"));
+			#$data = $db->all_json($filtered);
+			$data = $db->all_json();
 		?>
 
 	</head>
@@ -22,8 +23,11 @@
 				var list = [];	
 				var bathroom_data = <?= $data; ?>;
 				var bList = [];
+				var filterHash = filter_from_params();
 				for(var i in bathroom_data) {
 					var bathroom = bathroom_data[i];
+					//console.log(bathroom);
+					if (!matches_filter_requirements(filterHash, bathroom)) continue;
 					var loc = new google.maps.LatLng(bathroom.latitude, bathroom.longitude);
 					bathroom.dist = google.maps.geometry.spherical.computeDistanceBetween(position, loc);
 					bList.push(bathroom);
@@ -38,8 +42,8 @@
 					li.appendChild(a);
 					list.push(li);
 
-					$(a).click((function(name) {
-							return function() { window.location = "specificBathroom.php?origin=list&name=" + name; }
+					$(a).attr('href', (function(name) {
+							return "specificBathroom.php" + query_string(old_params(), {origin:"list", bathroom_id:bathroom.bathroom_id});
 						})(escape(bathroom.name)));
 				}
 				return list;
@@ -76,14 +80,23 @@
 				
 				<div class="ui-grid-a">
 					<div class="ui-block-a">
-						<a href="map.php" data-mini="true" data-inline="true" data-role="button">Map</a>
+						<a id="map_link" href="map.php" data-mini="true" data-inline="true" data-role="button">Map</a>
 						Bathrooms
 					</div>
 
 					<div class="ui-block-b">
 						<div data-role="controlgroup" data-type="horizontal">
-							<a href="filter.php?origin=list" data-mini="true" data-inline="true" data-role="button">Filter</a>
-							<a href="help.php?origin=list" data-mini="true" data-inline="true" data-role="button">Help</a>
+							<a id="filter_link" href="filter.php?origin=list" data-mini="true" data-inline="true" data-role="button">Filter</a>
+							<a id="help_link" href="help.php?origin=list" data-mini="true" data-inline="true" data-role="button">Help</a>
+							<script type="text/javascript">
+							$("#map_link").attr("href", "map.php" + query_string(old_params(), {origin:"list"}));
+							var filterLink = document.getElementById("filter_link");
+							var helpLink = document.getElementById("help_link");
+							filterLink.href = "filter.php" + query_string(old_params(), {origin:"list"});
+							//$("#help_link").attr("href", "help.php" + query_string({}, {origin:"list", originParams:originParams}));
+							helpLink.href = "help.php" + query_string(old_params(), {origin:"list"});
+							</script>
+
 						</div>
 					</div>
 				</div>
