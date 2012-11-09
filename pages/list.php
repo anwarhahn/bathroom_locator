@@ -93,6 +93,17 @@
 					<li id="bathroom-divider" data-role="list-divider">Bathrooms</li>				
 				</ul>
 			</div>
+
+			<?php
+			require ("footer.php");
+			?>
+			<script type="text/javascript">
+				var links = [{"name":"Help", "url":"help.php?origin=list", "icon":"custom"}, 
+							{"name":"Filter", "url":"filter.php?origin=list", "icon":"custom"}, 
+							{"name":"Map", "url":"map.php", "icon":"custom"}];
+				SetFooterLinks(links);
+			</script>
+
 		</div>
 	</body>
 </html>

@@ -31,7 +31,12 @@
 				})());
 
 				</script>
+<<<<<<< HEAD
+				 <br />
+				<a href="help.php?origin=filter">Help</a> <br />
+=======
 				
+>>>>>>> master
 
 
 			<form id="filter_form" action='map.php' method='get'>
@@ -56,17 +61,6 @@
 				//form.action = params.origin + ".php";
 			</script>
 		   	</div>
-	   	<?php
-			require ("footer.php");
-			?>
-
-			<script type="text/javascript">
-				var links = [{"name":"Help", "url":"help.php?origin=filter", "icon":"custom"}, 
-							{"name":"List", "url":"filter.php?origin=filter", "icon":"custom"}, 
-							{"name":"Map", "url":"map.php?origin=filter", "icon":"custom"}];
-				SetFooterLinks(links);
-			</script>
-
 	   	</div>
 </div>
 

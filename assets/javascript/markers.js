@@ -35,7 +35,7 @@ MarkerManager.prototype.addMarker = function(latLng, name)
 		button.onclick = function(evt) {
 			var query = ["name=" + escape(name), "origin=" + escape("map")];
 
-			window.location = "../../pages/specificBathroom.php?" + query.toString().replace(',', '&');
+			window.location = "specificBathroom.php?" + query.toString().replace(',', '&');
 		}
 		var p = document.createElement("p");
 		p.innerHTML = name + " ";

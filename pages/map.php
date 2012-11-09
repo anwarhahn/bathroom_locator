@@ -103,6 +103,17 @@
 
 			<div data-role="content" id="map_canvas"></div>
 			<a href="help.php?origin=map">Help</a>
+			<?php
+			require ("footer.php");
+			?>
+			<script type="text/javascript">
+				var links = [{"name":"Help", "url":"help.php?origin=map", "icon":"custom"}, 
+							{"name":"Filter", "url":"filter.php?origin=map", "icon":"custom"}, 
+							{"name":"List", "url":"list.php", "icon":"custom"}];
+				SetFooterLinks(links);
+			</script>
+
 		</div>
+
 	</body>
 </html>
