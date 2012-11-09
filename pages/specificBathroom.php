@@ -24,31 +24,50 @@
 				?>
 				<script type="text/javascript">
 					var bathroom = <?= $data; ?>;
-					console.log(bathroom);
+					//console.log(bathroom);
 					$("#h1_title").html(bathroom.name);
 				</script>
 			</div>
 
 		<div data-role="content">
-			<p>
+			<div  data-type="horizontal">
+				<a id="back_link" data-inline="true" data-role="button" href="#" >Back</a>
+				<a id="help_link" data-inline="true" data-role="button" href="#" >Help</a>
+				<a id="show_link" data-inline="true" data-role="button" href="#" >Show on map</a>
+			</div>
+
+			<div>
 				<script type="text/javascript">
-				var address = bathroom.address.split(",");
+				var address = human_readable_address(bathroom);
 				//console.log(address);
-				var len = address.length;
-				address[len-2] = address[len-2] + address[len-1];
-				address.splice(len-1,1);
-				address = address.join("<br />");
-				
-				//console.log(address);
-			
-				document.write(address);
+				document.write("<ul data-inset='true' data-role='listview'>");
+				document.write("<li data-role='list-divider'>Address</li>")
+				document.write("<li>" + address + "</li>");
+				document.write("</ul>");
 				</script>
-			</p>
-			<p>[Bathroom Amenities]</p>
+			</div>
+			<div>
+				<script type="text/javascript">
+				var amenities = bathroom_amenities(bathroom);
+				//console.log(amenities);
+				document.write("<ul data-inset='true' data-role='listview'>");
+				document.write("<li data-role='list-divider'>Amenities</li>")
+				for(var p in amenities) {
+					//console.log(p);
+					document.write("<li>" + p + "</li>");
+				}
+				document.write("</ul>");
+				</script>
+			</div>
 		
 			<script type="text/javascript">
 				var params = get_params();
-				document.write("<a href='" + params.origin + ".php'>Back</a>");
+				$("#back_link").attr("href", params.origin + ".php" + query_string(old_params(), {origin:"specificBathroom"}));
+				
+				var originParams = escape("?" + stringify_params(params));
+				$("#help_link").attr("href", "help.php" + query_string({}, {origin:"specificBathroom", originParams:originParams}));
+
+				$("#show_link").attr("href", "map.php" + query_string({bathroom_id:params.bathroom_id}, {show:1}));
 			</script>
 	</body>
 </html>
