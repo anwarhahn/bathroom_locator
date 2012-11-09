@@ -54,6 +54,15 @@
 					</tr>
 				</table>
 			</div>
+			<?php
+			require ("footer.php");
+			?>
+			<script type="text/javascript">
+				var links = [{"name":"Help", "url":"help.php", "icon":"custom"}, 
+							{"name":"Filter", "url":"filter.php", "icon":"custom"}, 
+							{"name":"Map", "url":"map.php", "icon":"custom"}];
+				SetFooterLinks(links);
+			</script>
 		</div>		
 	</body>
 </html>

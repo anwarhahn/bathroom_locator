@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>	
+	<head>
+		<?php
+			require("header.php");
+		?>
+	</head>
+	<body>
+		<div data-role="page">
+			<div data-role="header">
+<<<<<<< HEAD
+				<h1>Bathroom</h1>
+			</div>
+
+		<div data-role="content">
+=======
+				<h1>[Bathroom Name]</h1>
+			</div>
+
+		<div data-role="content">
+			<p>[Bathroom Address]</p>
+			<p>[Bathroom Amenities]</p>
+>>>>>>> master
+		
+			<script type="text/javascript">
+				var params = get_params();
+				document.write("<a href='" + params.origin + ".php'>Back</a>");
+			</script>
+
+
+		<a href="help.php">Help</a> <br />
+		<a href="map.php">Show on Map</a> <br />
+	</body>
+</html>

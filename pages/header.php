@@ -12,6 +12,7 @@
 
 	echo "<link rel='stylesheet' type='text/css' href='../assets/stylesheets/styles.css'>";
 	echo "<script src='".$javascript_path."util.js'></script>";
+	echo "<script src='".$javascript_path."footerlinks.js'></script>";
 
 	
 	

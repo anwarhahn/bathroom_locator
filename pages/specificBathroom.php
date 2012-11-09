@@ -50,14 +50,5 @@
 				var params = get_params();
 				document.write("<a href='" + params.origin + ".php'>Back</a>");
 			</script>
-
-
-		<a id="help_link" href="help.php?origin=specificBathroom">Help</a>
-		<script type="text/javascript">
-		var origin = escape("specificBathroom.php?origin="+params.origin+"&name="+params.name);
-		var returnURL = "help.php?escaped=1&origin="+origin;
-		$("#help_link").attr("href", returnURL);
-		</script>
-		<a href="map.php?show=<?= $bathroom['bathroom_id'] ?>">Show on Map</a>
 	</body>
 </html>
