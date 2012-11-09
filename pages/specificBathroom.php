@@ -31,9 +31,9 @@
 
 		<div data-role="content">
 			<div  data-type="horizontal">
-				<a id="back_link" data-inline="true" data-role="button" href="#" >Back</a>
-				<a id="help_link" data-inline="true" data-role="button" href="#" >Help</a>
-				<a id="show_link" data-inline="true" data-role="button" href="#" >Show on map</a>
+				<a id="back_link" data-mini="true" data-inline="true" data-role="button" href="#" >Back</a>
+				<a id="help_link" data-mini="true" data-inline="true" data-role="button" href="#" >Help</a>
+				<a id="show_link" data-mini="true" data-inline="true" data-role="button" href="#" >Show on map</a>
 			</div>
 
 			<div>

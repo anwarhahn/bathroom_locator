@@ -31,7 +31,7 @@
 
 
 			<form id="filter_form" action='map.php' method='get'>
-				<div data-role="controlgroup" data-type="horizontal">
+				<div data-role="controlgroup" data-type="vertical">
 		    		<fieldset data-role="options">
 				  		<input type="checkbox" name="male" value="1" id="checkbox-1" class="custom" />
 				   		<label for="checkbox-1">Male</label>

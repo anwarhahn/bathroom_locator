@@ -1,6 +1,10 @@
+@font-face {
+	font-family: avenir;
+	src: url('avenir/Avenir LT 35 Light.ttf');
+}
 
 body {
-	font-family: sans-serif, Arial;
+	font-family: avenir, sans-serif;
 	height: 100%;
 	margin: 0;
 	padding: 0;
@@ -42,6 +46,5 @@ html {
 
 #map_canvas {
 	min-width: 320px;
-	min-height: 315px;
-	
+	min-height: 480px;
 }
