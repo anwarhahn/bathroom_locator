@@ -15,7 +15,7 @@
 	<body>
 		<div data-role="page">
 			<div data-role="header">
-				<h1 id="h1_title"></h1>
+				<h2 id="h1_title"></h2>
 				<?php
 				include("../db/data.php");
 				$db = new Data();

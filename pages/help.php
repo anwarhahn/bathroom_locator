@@ -23,12 +23,12 @@
 				});			
 			</script>
 			<div data-role="header">
-				<h1>Help</h1>
+				<h2>Help</h2>
 				<a data-role="button" data-mini="true" data-inline="true" id="cancel_link">Cancel</a>
 			</div>
 
 			<div data-role="content">
-				<p>Welcome to [NAME OF APP HERE]!  It's our goal to make it as easy as possible for you to find bathrooms, when and where you need them.</p>
+				<p>Welcome to <b>Flush</b>!  It's our goal to make it as easy as possible for you to find bathrooms, when and where you need them.</p>
 				<h2>From the map view:</h2>
 				<p>The map will automatically find your location and display the bathrooms nearby on the map.  Click on them for more information.  Feel free to search for a new address or drag the map around.</p>
 				<h2>From the list view:</h2>
@@ -55,12 +55,10 @@
 				</table>
 			</div>
 			<?php
-			require ("footer.php");
+				require ("footer.php");
 			?>
 			<script type="text/javascript">
-				var links = [{"name":"Help", "url":"help.php", "icon":"custom"}, 
-							{"name":"Filter", "url":"filter.php", "icon":"custom"}, 
-							{"name":"Map", "url":"map.php", "icon":"custom"}];
+				var links = [];
 				SetFooterLinks(links);
 			</script>
 		</div>		

@@ -13,7 +13,7 @@
 		<div data-role="page">
 
 			<div data-role="header">
-				<h1>Filter</h1>
+				<h2>Filter</h2>
 				<a data-role="button" data-mini="true" data-inline="true" id="cancel_link">Cancel</a>
 				<a id="help_link" href="help.php?origin=filter" data-role="button" data-mini="true" data-inline="true">Help</a>
 			</div>
@@ -83,20 +83,14 @@
 				};
 			</script>
 		   	</div>
-	   	<?php
-			require ("footer.php");
-			?>
 
+	   		<?php
+				require ("footer.php");
+			?>
 			<script type="text/javascript">
-				var links = [{"name":"Help", "url":"help.php?origin=filter", "icon":"custom"}, 
-							{"name":"List", "url":"filter.php?origin=filter", "icon":"custom"}, 
-							{"name":"Map", "url":"map.php?origin=filter", "icon":"custom"}];
+				var links = []
 				SetFooterLinks(links);
 			</script>
-
 	   	</div>
-</div>
-
-
 	</body>
 </html>

@@ -111,10 +111,14 @@
 	<body onload="loadMap()">
 		<div data-role="page" data-title="Map">
 			<div data-role="header" id="search-panel">
+				<h2>Map</h2>
+				<a data-role="button" data-mini="true" data-inline="true" href="map.php">Show all</a>
+				<!--//OLD-LAYOUT//
 				<div class="ui-grid-b">
 					<div class="ui-block-a"><a id="list_link" href="list.php" data-inline="true" data-role="button">List</a></div>
 					<div class="ui-block-b"><input data-mini="true" id="target" type="search" placeholder="Search Box" autocomplete="off"></div>
 					<div class="ui-block-c"><a id="filter_link" href="filter.php?origin=map" data-inline="true" data-role="button">Filter</a></div>
+					
 					<script type="text/javascript">
 					var filterLink = document.getElementById("filter_link");
 					var listLink = document.getElementById("list_link");
@@ -122,24 +126,28 @@
 					listLink.href = "list.php" + query_string(old_params(), {});
 					</script>
 				</div>
+				//OLD-LAYOUT//-->
 			</div>
 
 			<div data-role="content" id="map_canvas"></div>
-			<a href="help.php?origin=map">Help</a>
+
 			<?php
-			require ("footer.php");
+				require ("footer.php");
 			?>
 			<script type="text/javascript">
-				var links = [{"name":"Help", "url":"help.php?origin=map", "icon":"custom"}, 
-							{"name":"Filter", "url":"filter.php?origin=map", "icon":"custom"}, 
-							{"name":"List", "url":"list.php", "icon":"custom"}];
+				var links = [
+				{name:"List", url:"list.php" + query_string(old_params(), {}), icon:"custom"},
+				{name:"Filter", url:"filter.php" + query_string(old_params(), {origin:"map"}), icon:"custom"}, 				
+				{name:"Help", url:"help.php" + query_string(old_params(), {origin:"map"}), icon:"custom"}];
 				SetFooterLinks(links);
 			</script>
 
-			<a id="help_link" href="help.php?origin=map">Help</a>
+			<!--//OLD-LAYOUT//
+			<a id="help_link" href="help.php?origin=map">Help</a> 
 			<script type="text/javascript">
-			$("#help_link").attr("href", "help.php" + query_string(old_params(), {origin:"map"}));
+				$("#help_link").attr("href", "help.php" + query_string(old_params(), {origin:"map"}));
 			</script>
+			//OLD-LAYOUT//-->
 		</div>
 	</body>
 </html>

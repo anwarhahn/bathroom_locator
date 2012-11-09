@@ -77,7 +77,8 @@
 
 		<div data-role="page" id="home">
 			<div data-role="header">
-				
+				<h2>Bathrooms</h2>
+				<!--//OLD-LAYOUT//
 				<div class="ui-grid-a">
 					<div class="ui-block-a">
 						<a id="map_link" href="map.php" data-mini="true" data-inline="true" data-role="button">Map</a>
@@ -100,6 +101,7 @@
 						</div>
 					</div>
 				</div>
+				//OLD-LAYOUT//-->
 			</div>
 
 			<div data-role="content">
@@ -109,15 +111,15 @@
 			</div>
 
 			<?php
-			require ("footer.php");
+				require ("footer.php");
 			?>
 			<script type="text/javascript">
-				var links = [{"name":"Help", "url":"help.php?origin=list", "icon":"custom"}, 
-							{"name":"Filter", "url":"filter.php?origin=list", "icon":"custom"}, 
-							{"name":"Map", "url":"map.php", "icon":"custom"}];
+				var links = [
+				{name:"Map", url:"map.php" + query_string(old_params(), {origin:"list"}), icon:"custom"}, 
+				{name:"Filter", url:"filter.php" + query_string(old_params(), {origin:"list"}), icon:"custom"},
+				{name:"Help", url:"help.php" + query_string(old_params(), {origin:"list"}), icon:"custom"}];
 				SetFooterLinks(links);
 			</script>
-
 		</div>
 	</body>
 </html>
