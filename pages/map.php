@@ -99,6 +99,13 @@
 			}
 
 			function loadMap(){
+				disable_safari();
+
+				var header = $("#search-panel").height();
+				var footer = $("#footerlist").height();
+				//console.log(document.height + " " + header + " " + footer);
+				//console.log(document.height - footer - header);
+				$("#map_canvas").height(document.height - header - footer - 42);
 				if (navigator.geolocation) {
 					navigator.geolocation.getCurrentPosition(success, notsuccess);
 				} else {

@@ -10,7 +10,7 @@
 	</head>
 	<body>
 
-		<div data-role="page">
+		<div data-role="page" id="home">
 
 			<div data-role="header">
 				<h2>Filter</h2>
@@ -90,6 +90,10 @@
 			<script type="text/javascript">
 				var links = []
 				SetFooterLinks(links);
+
+				$("#home").bind('pageinit',function() {
+        			disable_safari();
+    			});
 			</script>
 	   	</div>
 	</body>

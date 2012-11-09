@@ -12,6 +12,7 @@
 		<div data-role="page" id="home">
 			<script type="text/javascript">
 				$('#home').live('pageinit', function(event) {
+					disable_safari();
 					var params = get_params();
 					if (params.originParams) {
 						params.originParams = unescape(params.originParams);

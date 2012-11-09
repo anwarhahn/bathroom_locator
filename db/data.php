@@ -33,8 +33,8 @@ class Data {
 		return $this->$array;
 	}
 
-	function all_json($arr) {
-		if (!$arr) $arr = $this->array;
+	function all_json($arr = []) {
+		if ($arr == []) $arr = $this->array;
 		return json_encode($arr);
 	}
 

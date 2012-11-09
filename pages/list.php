@@ -50,6 +50,8 @@
 			}
 
 			$(document).bind('pageinit', function(event) {
+        		disable_safari();
+
 				if (navigator.geolocation) {
 					var success = function(position) {
 						latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);

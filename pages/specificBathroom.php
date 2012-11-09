@@ -13,7 +13,7 @@
 		</script>
 	</head>
 	<body>
-		<div data-role="page">
+		<div data-role="page" id="home">
 			<div data-role="header">
 				<h2 id="h1_title"></h2>
 				<?php
@@ -68,6 +68,11 @@
 				$("#help_link").attr("href", "help.php" + query_string({}, {origin:"specificBathroom", originParams:originParams}));
 
 				$("#show_link").attr("href", "map.php" + query_string({bathroom_id:params.bathroom_id}, {show:1}));
+
+				$("#home").live('pageinit',function() {
+        			disable_safari();
+    			});
+
 			</script>
 	</body>
 </html>

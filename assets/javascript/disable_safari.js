@@ -1,5 +1,9 @@
-$("a").click(function(evt) {
-	evt.preventDefault();
-	window.location = this.attr("href");
-	return false;
-});
+function disable_safari() {
+	$("a").click(function(evt) {
+		evt.preventDefault();
+		console.log(this);
+		//alert("hello");
+		window.location = $( this ).attr( "href" );
+		return false;
+	});
+}
