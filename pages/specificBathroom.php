@@ -16,6 +16,9 @@
 		<div data-role="page" id="home">
 			<div data-role="header">
 				<h2 id="h1_title"></h2>
+				<a id="back_link" data-role="button" data-mini="true" data-inline="true">Back</a>
+				<a id="help_link" data-role="button" data-mini="true" data-inline="true">Help</a>
+
 				<?php
 				include("../db/data.php");
 				$db = new Data();
@@ -30,21 +33,18 @@
 			</div>
 
 		<div data-role="content">
-			<div  data-type="horizontal">
-				<a id="back_link" data-mini="true" data-inline="true" data-role="button" href="#" >Back</a>
-				<a id="help_link" data-mini="true" data-inline="true" data-role="button" href="#" >Help</a>
-				<a id="show_link" data-mini="true" data-inline="true" data-role="button" href="#" >Show on map</a>
-			</div>
+			
 
 			<div>
-				<script type="text/javascript">
-				var address = human_readable_address(bathroom);
-				//console.log(address);
-				document.write("<ul data-inset='true' data-role='listview'>");
-				document.write("<li data-role='list-divider'>Address</li>")
-				document.write("<li>" + address + "</li>");
-				document.write("</ul>");
-				</script>
+				<ul data-inset='true' data-role='listview' id="address_list">
+					<li data-role='list-divider'>Address</li>
+					<script type="text/javascript">
+					var address = human_readable_address(bathroom);
+					//console.log(address);
+					var link = "<a id='show_link' data-mini='true' data-inline='true' data-role='button' href='#' >Show on map</a>";
+					$("#address_list").append("<li><span>"+address+"</span><span>"+ link +"</span></li>");
+					</script>
+				</ul>
 			</div>
 			<div>
 				<script type="text/javascript">

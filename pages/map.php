@@ -119,7 +119,7 @@
 		<div data-role="page" data-title="Map">
 			<div data-role="header" id="search-panel">
 				<h2>Map</h2>
-				<a data-role="button" data-mini="true" data-inline="true" href="map.php">Show all</a>
+				<a data-role="button" data-mini="true" data-theme="b" data-inline="true" href="map.php">Show all</a>
 				<!--//OLD-LAYOUT//
 				<div class="ui-grid-b">
 					<div class="ui-block-a"><a id="list_link" href="list.php" data-inline="true" data-role="button">List</a></div>

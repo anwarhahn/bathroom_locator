@@ -21,14 +21,17 @@
 					
 
 
-				<script type="text/javascript">
+			<script type="text/javascript">
 				var params = get_params();
 				$("#cancel_link").attr("href", params.origin + ".php" + query_string(old_params(), {origin:"filter"}));
 				var originParams = escape("?" + stringify_params(params));
 				$("#help_link").attr("href", "help.php" + query_string({}, {origin:"filter", originParams:originParams}));
-				</script>
+			</script>
 				
-
+			<div data-type="controlgroup">
+				<button data-mini="true" data-inline="true" id="uncheck_all" type="button" data-theme="a">Uncheck all</button>
+				<button data-mini="true" data-inline="true" id="check_all" type="button" data-theme="a">Check all</button>
+			</div>
 
 			<form id="filter_form" action='map.php' method='get'>
 				<div data-role="controlgroup" data-type="vertical">
@@ -44,7 +47,7 @@
 		   			 </fieldset>
 		   		</div>
 
-		   		<button id="submit_button" type="button" data-theme="a">Submit</button>
+		   		<button id="submit_button" type="button" data-theme="a">Filter Bathrooms</button>
 		   	</form>
 
 		   	<script type="text/javascript">
@@ -81,6 +84,13 @@
 					window.location = url;
 					return false; // stop form submit
 				};
+
+				$("#uncheck_all").click(function() {
+					$("#filter_form input[type=checkbox]").attr("checked", false).checkboxradio("refresh");
+				});
+				$("#check_all").click(function() {
+					$("#filter_form input[type=checkbox]").attr("checked", true).checkboxradio("refresh");
+				});
 			</script>
 		   	</div>
 

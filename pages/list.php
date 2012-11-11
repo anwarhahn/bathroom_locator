@@ -38,7 +38,7 @@
 					var bathroom = bList[i];
 					var li = document.createElement("li");
 					var a = document.createElement("a");
-					a.innerHTML = "<h3>" + bathroom.name + "</h3><p>"+bathroom.dist.toPrecision(4)+" meters</p>";
+					a.innerHTML = "<h3>" + (i+1) + ". " +bathroom.name + "</h3><p>"+bathroom.dist.toPrecision(4)+" meters away</p>";
 					li.appendChild(a);
 					list.push(li);
 
@@ -49,6 +49,16 @@
 				return list;
 			}
 
+			var showList = function(list) {
+				$("#list_info").html("Showing "+list.length+" of <?= $db->table_size() ?>");
+				if (list.length == 0) {
+					var li = document.createElement("li");
+					li.innerHTML = "No bathrooms match that criteria.";
+					list.push(li);
+				}
+				$("#bathroom_list").append(list).listview();
+			}
+
 			$(document).bind('pageinit', function(event) {
         		disable_safari();
 
@@ -57,9 +67,7 @@
 						latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 						var list = makeList(latLng);
 						//console.log(list);
-						var ul = $("<ul>");
-						$("#home").append(ul);
-						$("#bathroom_list").append(list).listview();
+						showList(list);
 					}
 
 					navigator.geolocation.getCurrentPosition(success, function() {});
@@ -67,13 +75,9 @@
 				} else {
 					var list = makeList(stanfordLatLng);
 					//console.log(list);
-					var ul = $("<ul>");
-					$("#home").append(ul);
-					$("#bathroom_list").append(list).listview();
+					showList(list);
 				}
 			});			
-
-			
 		</script>
 
 
@@ -106,7 +110,9 @@
 				//OLD-LAYOUT//-->
 			</div>
 
+
 			<div data-role="content">
+				<div id="list_info"></div>
 				<ul  data-inset="true" data-split-icon="arrow-r" data-split-theme="a" id="bathroom_list">
 					<li id="bathroom-divider" data-role="list-divider">Bathrooms</li>				
 				</ul>

@@ -8,6 +8,7 @@ class Data {
 	private $table_name = "bathrooms";
 	private $query_all = "select * from bathrooms";
 	private $query = "select * from bathrooms";
+	private $num_rows = 0;
 
 	function __construct() {
 		//do nothing
@@ -16,6 +17,7 @@ class Data {
 	function refresh($sql_query) {
 		$result = mysql_query(mysql_real_escape_string($sql_query));
 		if ($result) {
+			$this->num_rows = mysql_num_rows($result);
 			$myarray = new ArrayObject();
 			while ($row = mysql_fetch_assoc($result)) {
 				$myarray->append($row);
@@ -57,6 +59,10 @@ class Data {
 		#echo gettype($sql_query);
 		$this->refresh($sql_query);
 		return $this->array[0];
+	}
+
+	function table_size() {
+		return $this->num_rows;
 	}
 }
 ?>
