@@ -22,6 +22,8 @@
 			  	var myOptions = {
 			    	zoom: 15,
 			    	center: latlng,
+			    	zoomControl: true,
+					panControl: true,
 				    mapTypeId: google.maps.MapTypeId.ROADMAP
 				};
 				createMap(myOptions, latlng);
@@ -32,6 +34,8 @@
 				var mapOptions = {
 					center: stanfordLatLng,
 					zoom: 15,
+					zoomControl: true,
+					panControl: true,
 					mapTypeId: google.maps.MapTypeId.ROADMAP
 				};
 				createMap(mapOptions, null);
@@ -119,21 +123,7 @@
 		<div data-role="page" data-title="Map">
 			<div data-role="header" id="search-panel">
 				<h2>Map</h2>
-				<a data-role="button" data-mini="true" data-theme="b" data-inline="true" href="map.php">Show all</a>
-				<!--//OLD-LAYOUT//
-				<div class="ui-grid-b">
-					<div class="ui-block-a"><a id="list_link" href="list.php" data-inline="true" data-role="button">List</a></div>
-					<div class="ui-block-b"><input data-mini="true" id="target" type="search" placeholder="Search Box" autocomplete="off"></div>
-					<div class="ui-block-c"><a id="filter_link" href="filter.php?origin=map" data-inline="true" data-role="button">Filter</a></div>
-					
-					<script type="text/javascript">
-					var filterLink = document.getElementById("filter_link");
-					var listLink = document.getElementById("list_link");
-					filterLink.href = "filter.php" + query_string(old_params(), {origin:"map"});
-					listLink.href = "list.php" + query_string(old_params(), {});
-					</script>
-				</div>
-				//OLD-LAYOUT//-->
+				<a data-role="button" data-mini="true" data-theme="b" href="map.php">Show all</a>
 			</div>
 
 			<div data-role="content" id="map_canvas"></div>
