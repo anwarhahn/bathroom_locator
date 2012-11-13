@@ -1,4 +1,8 @@
 <?php
+
+	function printn($text) {
+		echo "{$text}\n";
+	}
 	$asset_path = "../assets/";
 
 	echo "<link rel='apple-touch-icon' href='".$asset_path."/images/appicon.png' />";
