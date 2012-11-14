@@ -10,7 +10,18 @@
 	</head>
 	<body>
 
-		<div data-role="page" id="home">
+		<div data-role="page" id="filter_home">
+			<script type="text/javascript">
+				var makeFooter = function() {
+					var links = [];
+					SetFooterLinks("#filter_home", links);
+				}
+
+				$(document).delegate("#filter_home", 'pagebeforecreate', function(event) {
+        			disable_safari();
+        			makeFooter();
+    			});
+			</script>
 
 			<div data-role="header">
 				<h2>Filter</h2>
@@ -22,10 +33,6 @@
 
 
 			<script type="text/javascript">
-				var params = get_params();
-				$("#cancel_link").attr("href", params.origin + ".php" + query_string(old_params(), {origin:"filter"}));
-				var originParams = escape("?" + stringify_params(params));
-				$("#help_link").attr("href", "help.php" + query_string({}, {origin:"filter", originParams:originParams}));
 			</script>
 				
 			<div data-type="controlgroup">
@@ -51,6 +58,20 @@
 		   	</form>
 
 		   	<script type="text/javascript">
+			</script>
+		   	</div>
+
+	   		<?php
+				require ("footer.php");
+			?>
+			<script type="text/javascript">
+
+			$(document).delegate("#filter_home", 'pageshow', function(event) {
+				var params = get_params();
+				$("#cancel_link").attr("href", params.origin + ".php" + query_string(old_params(), {origin:"filter"}));
+				var originParams = escape("?" + stringify_params(params));
+				$("#help_link").attr("href", "help.php" + query_string({}, {origin:"filter", originParams:originParams}));
+
 				var form = document.getElementById("filter_form");
 				//console.log(form);
 				form.action = params.origin + ".php";
@@ -60,7 +81,9 @@
 				var filterHash = filter_from_params();
 				for(var i = 0; i < inputs.length; i++) {
 					var checkbox = inputs[i];
-					if(filterHash[checkbox.name]) checkbox.checked = true;
+					if(filterHash[checkbox.name]) {
+						$("#" + checkbox.id).attr("checked", true).checkboxradio("refresh");
+					}
 				}
 				//console.log(filterHash);
 				
@@ -91,19 +114,8 @@
 				$("#check_all").click(function() {
 					$("#filter_form input[type=checkbox]").attr("checked", true).checkboxradio("refresh");
 				});
-			</script>
-		   	</div>
 
-	   		<?php
-				require ("footer.php");
-			?>
-			<script type="text/javascript">
-				var links = []
-				SetFooterLinks(links);
-
-				$("#home").bind('pageinit',function() {
-        			disable_safari();
-    			});
+			});
 			</script>
 	   	</div>
 	</body>

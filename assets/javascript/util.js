@@ -1,6 +1,11 @@
-function get_params()
+function get_params(searchString)
 {
-	var search = window.location.search;
+	if (searchString) {
+		var search = searchString;
+	}
+	else {
+		var search = window.location.search;
+	}
 	if (search.length == 0) return {};
 
 	search = search.replace('?', '');

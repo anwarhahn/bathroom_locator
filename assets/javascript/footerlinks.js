@@ -1,9 +1,12 @@
-function SetFooterLinks(footerobjects){
-	var links = document.getElementById("footerlist");
+function SetFooterLinks(jqueryPageId, footerobjects){
+	var selector = jqueryPageId;// + " div:last";
+	//console.log(selector);
+	var links = $(selector).find("#footerlist");
 	var list = "<ul>";
 	for (var i = 0; i < footerobjects.length; i ++){
 		var obj = footerobjects[i];
 		list += "<li><a href='" + obj.url +"' id='"+ obj.url +"' data-icon='"+ obj.icon +"'>"+ obj.name +"</a></li>";
 	}
-	links.innerHTML=list + "</ul>";
+	links.html(list + "</ul>");
+	//console.log(links.get(0));
 }

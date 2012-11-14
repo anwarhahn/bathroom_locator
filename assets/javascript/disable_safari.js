@@ -1,4 +1,5 @@
 function disable_safari() {
+	return;
 	$("a").click(function(evt) {
 		evt.preventDefault();
 		console.log(this);

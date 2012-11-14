@@ -14,100 +14,89 @@
 
 	</head>
 	<body>
-		<script type='text/javascript'>
-			
-			// default to stanford center
-			var stanfordLatLng = new google.maps.LatLng(37.428729,-122.171329);
-			
-			var makeList = function(position) {
-				var list = [];	
-				var bathroom_data = <?= $data; ?>;
-				var bList = [];
-				var filterHash = filter_from_params();
-				for(var i in bathroom_data) {
-					var bathroom = bathroom_data[i];
-					//console.log(bathroom);
-					if (!matches_filter_requirements(filterHash, bathroom)) continue;
-					var loc = new google.maps.LatLng(bathroom.latitude, bathroom.longitude);
-					bathroom.dist = google.maps.geometry.spherical.computeDistanceBetween(position, loc);
-					bList.push(bathroom);
-				}
-				bList.sort(function(a, b) { return (a.dist - b.dist); });
+		<div data-role="page" id="list_home">
+			<script type="text/javascript">
+				$(document).delegate("#list_home", 'pagebeforecreate', function(event) {
+		    		disable_safari();
 
-				for(var i = 0; i < bList.length; i++) {
-					var bathroom = bList[i];
-					var li = document.createElement("li");
-					var a = document.createElement("a");
-					a.innerHTML = "<h3>" + (i+1) + ". " +bathroom.name + "</h3><p>"+bathroom.dist.toPrecision(4)+" meters away</p>";
-					li.appendChild(a);
-					list.push(li);
-
-					$(a).attr('href', (function(name) {
-							return "specificBathroom.php" + query_string(old_params(), {origin:"list", bathroom_id:bathroom.bathroom_id});
-						})(escape(bathroom.name)));
-				}
-				return list;
-			}
-
-			var showList = function(list) {
-				$("#list_info").html("Showing "+list.length+" of <?= $db->table_size() ?>");
-				if (list.length == 0) {
-					var li = document.createElement("li");
-					li.innerHTML = "No bathrooms match that criteria.";
-					list.push(li);
-				}
-				$("#bathroom_list").append(list).listview();
-			}
-
-			$(document).bind('pageinit', function(event) {
-        		disable_safari();
-
-				if (navigator.geolocation) {
-					var success = function(position) {
-						latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+	    			var success = function(position, googleMaps) {
+	    				var latLng = null;
+	    				if (googleMaps) latLng = new google.maps.LatLng(position.lat(), position.lng());
+	    				else latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+	    				//console.log(latLng);
 						var list = makeList(latLng);
 						//console.log(list);
 						showList(list);
 					}
 
-					navigator.geolocation.getCurrentPosition(success, function() {});
+					if (navigator.geolocation) {
+						navigator.geolocation.getCurrentPosition(success, function() { success(stanfordLatLng, true); });
+					} else {
+						success(stanfordLatLng);
+					}
+					//console.log("calling makeFooter()");
+					makeFooter();
+				});			
+			</script>
 
-				} else {
-					var list = makeList(stanfordLatLng);
-					//console.log(list);
-					showList(list);
+				<script type='text/javascript'>
+				//console.log("above making footer");
+				var makeFooter = function() {
+					//console.log("making footer");
+					var links = [
+					{name:"Map", url:"map.php" + query_string(old_params(), {origin:"list"}), icon:"custom"}, 
+					{name:"Filter", url:"filter.php" + query_string(old_params(), {origin:"list"}), icon:"custom"},
+					{name:"Help", url:"help.php" + query_string(old_params(), {origin:"list"}), icon:"custom"}];
+					SetFooterLinks("#list_home", links);
 				}
-			});			
-		</script>
+				
+				// default to stanford center
+				var stanfordLatLng = new google.maps.LatLng(37.428729,-122.171329);
+				
+				var makeList = function(position) {
+					var list = [];	
+					var bathroom_data = <?= $data; ?>;
+					var bList = [];
+					var filterHash = filter_from_params();
+					for(var i in bathroom_data) {
+						var bathroom = bathroom_data[i];
+						//console.log(bathroom);
+						if (!matches_filter_requirements(filterHash, bathroom)) continue;
+						var loc = new google.maps.LatLng(bathroom.latitude, bathroom.longitude);
+						bathroom.dist = google.maps.geometry.spherical.computeDistanceBetween(position, loc);
+						bList.push(bathroom);
+					}
+					bList.sort(function(a, b) { return (a.dist - b.dist); });
 
+					for(var i = 0; i < bList.length; i++) {
+						var bathroom = bList[i];
+						var li = document.createElement("li");
+						var a = document.createElement("a");
+						a.innerHTML = "<h3>" + (i+1) + ". " +bathroom.name + "</h3><p>"+bathroom.dist.toPrecision(4)+" meters away</p>";
+						li.appendChild(a);
+						list.push(li);
 
-		<div data-role="page" id="home">
+						$(a).attr('href', (function(name) {
+								return "specificBathroom.php" + query_string(old_params(), {origin:"list", bathroom_id:bathroom.bathroom_id});
+							})(escape(bathroom.name)));
+					}
+					return list;
+				}
+
+				var showList = function(list) {
+					$("#list_info").html("Showing "+list.length+" of <?= $db->table_size() ?>");
+					if (list.length == 0) {
+						var li = document.createElement("li");
+						li.innerHTML = "No bathrooms match that criteria.";
+						list.push(li);
+					}
+					$("#bathroom_list").append(list).listview();
+				}
+
+			</script>
 			<div data-role="header">
 				<h2>Bathrooms</h2>
-				<!--//OLD-LAYOUT//
-				<div class="ui-grid-a">
-					<div class="ui-block-a">
-						<a id="map_link" href="map.php" data-mini="true" data-inline="true" data-role="button">Map</a>
-						Bathrooms
-					</div>
-
-					<div class="ui-block-b">
-						<div data-role="controlgroup" data-type="horizontal">
-							<a id="filter_link" href="filter.php?origin=list" data-mini="true" data-inline="true" data-role="button">Filter</a>
-							<a id="help_link" href="help.php?origin=list" data-mini="true" data-inline="true" data-role="button">Help</a>
-							<script type="text/javascript">
-							$("#map_link").attr("href", "map.php" + query_string(old_params(), {origin:"list"}));
-							var filterLink = document.getElementById("filter_link");
-							var helpLink = document.getElementById("help_link");
-							filterLink.href = "filter.php" + query_string(old_params(), {origin:"list"});
-							//$("#help_link").attr("href", "help.php" + query_string({}, {origin:"list", originParams:originParams}));
-							helpLink.href = "help.php" + query_string(old_params(), {origin:"list"});
-							</script>
-
-						</div>
-					</div>
-				</div>
-				//OLD-LAYOUT//-->
+				<a data-role="button" data-mini="true" data-theme="b" href="list.php">Show all</a>
 			</div>
 
 
@@ -121,13 +110,6 @@
 			<?php
 				require ("footer.php");
 			?>
-			<script type="text/javascript">
-				var links = [
-				{name:"Map", url:"map.php" + query_string(old_params(), {origin:"list"}), icon:"custom"}, 
-				{name:"Filter", url:"filter.php" + query_string(old_params(), {origin:"list"}), icon:"custom"},
-				{name:"Help", url:"help.php" + query_string(old_params(), {origin:"list"}), icon:"custom"}];
-				SetFooterLinks(links);
-			</script>
 		</div>
 	</body>
 </html>
