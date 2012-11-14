@@ -16,7 +16,7 @@
 	<body>
 		<div data-role="page" id="list_home">
 			<script type="text/javascript">
-				$(document).delegate("#list_home", 'pagebeforecreate', function(event) {
+				$(document).delegate("#list_home", 'pageshow', function(event) {
 		    		disable_safari();
 
 	    			var success = function(position, googleMaps) {
@@ -34,12 +34,8 @@
 					} else {
 						success(stanfordLatLng);
 					}
-					//console.log("calling makeFooter()");
-					makeFooter();
 				});			
-			</script>
-
-				<script type='text/javascript'>
+			
 				//console.log("above making footer");
 				var makeFooter = function() {
 					//console.log("making footer");
@@ -49,6 +45,10 @@
 					{name:"Help", url:"help.php" + query_string(old_params(), {origin:"list"}), icon:"custom"}];
 					SetFooterLinks("#list_home", links);
 				}
+
+				$(document).delegate("#list_home", 'pagebeforecreate', function(event) {
+					makeFooter();
+				});
 				
 				// default to stanford center
 				var stanfordLatLng = new google.maps.LatLng(37.428729,-122.171329);
@@ -96,7 +96,7 @@
 			</script>
 			<div data-role="header">
 				<h2>Bathrooms</h2>
-				<a data-role="button" data-mini="true" data-theme="b" href="list.php">Show all</a>
+				<a data-role="button" data-mini="true" data-theme="b" rel="external" href="list.php">Show all</a>
 			</div>
 
 

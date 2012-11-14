@@ -9,7 +9,7 @@
 
 	</head>
 	<body>
-		<div data-role="page" id="home">
+		<div data-role="page" id="help_home">
 			<script type="text/javascript">
 				$('#home').live('pageinit', function(event) {
 					disable_safari();
@@ -25,7 +25,7 @@
 			</script>
 			<div data-role="header">
 				<h2>Help</h2>
-				<a data-role="button" data-mini="true" data-inline="true" id="cancel_link">Cancel</a>
+				<a data-role="button" data-rel="back" data-mini="true" data-inline="true" id="cancel_link">Cancel</a>
 			</div>
 
 			<div data-role="content">
@@ -60,7 +60,7 @@
 			?>
 			<script type="text/javascript">
 				var links = [];
-				SetFooterLinks(links);
+				SetFooterLinks("#help_home",links);
 			</script>
 		</div>		
 	</body>

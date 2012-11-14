@@ -17,7 +17,7 @@
 					SetFooterLinks("#filter_home", links);
 				}
 
-				$(document).delegate("#filter_home", 'pagebeforecreate', function(event) {
+				$(document).delegate("#filter_home", 'pageshow', function(event) {
         			disable_safari();
         			makeFooter();
     			});
@@ -25,7 +25,7 @@
 
 			<div data-role="header">
 				<h2>Filter</h2>
-				<a data-role="button" data-mini="true" data-inline="true" id="cancel_link">Cancel</a>
+				<a data-role="button" data-rel="back" data-mini="true" data-inline="true" id="cancel_link">Cancel</a>
 				<a id="help_link" href="help.php?origin=filter" data-role="button" data-mini="true" data-inline="true">Help</a>
 			</div>
 			<div data-role="content">
