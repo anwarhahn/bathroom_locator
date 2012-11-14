@@ -60,27 +60,7 @@
 					$("#bathroom_list").append(list).listview();
 				}
 
-				$(document).bind('pageinit', function(event) {
-	        		disable_safari();
-
-					if (navigator.geolocation) {
-						var success = function(position) {
-							latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-							var list = makeList(latLng);
-							//console.log(list);
-							showList(list);
-						}
-
-						navigator.geolocation.getCurrentPosition(success, function() {});
-
-					} else {
-						var list = makeList(stanfordLatLng);
-						//console.log(list);
-						showList(list);
-					}
-				});			
 			</script>
-
 			<div data-role="header">
 				<h2>Bathrooms</h2>
 				<a data-role="button" data-mini="true" data-theme="b" href="list.php">Show all</a>
@@ -105,5 +85,26 @@
 				SetFooterLinks(links);
 			</script>
 		</div>
+		<script type="text/javascript">
+			$("#home").bind('pageinit', function(event) {
+	    		disable_safari();
+
+    			var success = function(position, googleMaps) {
+    				var latLng = null;
+    				if (googleMaps) latLng = new google.maps.LatLng(position.lat(), position.lng());
+    				else latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    				//console.log(latLng);
+					var list = makeList(latLng);
+					//console.log(list);
+					showList(list);
+				}
+
+				if (navigator.geolocation) {
+					navigator.geolocation.getCurrentPosition(success, function() { success(stanfordLatLng, true); });
+				} else {
+					success(stanfordLatLng);
+				}
+			});			
+		</script>
 	</body>
 </html>
