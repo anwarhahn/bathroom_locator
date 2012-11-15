@@ -72,6 +72,7 @@
 						var li = document.createElement("li");
 						var a = document.createElement("a");
 						a.innerHTML = "<h3>" + (i+1) + ". " +bathroom.name + "</h3><p>"+bathroom.dist.toPrecision(4)+" meters away</p>";
+						a.setAttribute('rel', 'external');
 						li.appendChild(a);
 						list.push(li);
 
