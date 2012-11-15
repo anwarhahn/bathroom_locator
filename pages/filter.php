@@ -10,16 +10,25 @@
 	</head>
 	<body>
 
-		<div data-role="page" id="filter_home">
+		<div data-role="page" class="filter_home">
 			<script type="text/javascript">
 				var makeFooter = function() {
-					var links = [];
-					SetFooterLinks("#filter_home", links);
+					var originParams = escape("?" + stringify_params(get_params()));
+					var links = [
+					{name:"Map", url:"map.php" + query_string(old_params(), {origin:"filter"}), icon:"custom"}, 
+					{name:"List", url:"list.php" + query_string(old_params(), {origin:"filter"}), icon:"custom"},
+					{name:"Filter", url:"#", icon:"custom"}, 				
+					{name:"Help", url:"help.php" + query_string({}, {origin:"filter", originParams:originParams}), icon:"custom"}];
+					SetFooterLinks(".filter_home", links);
 				}
 
-				$(document).delegate("#filter_home", 'pageshow', function(event) {
+				$(document).delegate(".filter_home", 'pagebeforecreate', function(event) {
+					makeFooter();
+				});
+
+				$(document).delegate(".filter_home", 'pageshow', function(event) {
         			disable_safari();
-        			makeFooter();
+        			$(".filter_home #filter_footer_link").addClass("ui-btn-active");
     			});
 			</script>
 
@@ -66,7 +75,7 @@
 			?>
 			<script type="text/javascript">
 
-			$(document).delegate("#filter_home", 'pageshow', function(event) {
+			$(document).delegate(".filter_home", 'pageshow', function(event) {
 				var params = get_params();
 				$("#cancel_link").attr("href", params.origin + ".php" + query_string(old_params(), {origin:"filter"}));
 				var originParams = escape("?" + stringify_params(params));

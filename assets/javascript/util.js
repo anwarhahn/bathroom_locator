@@ -1,7 +1,11 @@
 function get_params(searchString)
 {
 	if (searchString) {
-		var search = searchString;
+		var from = 0;
+		var to = searchString.length;
+		var index = searchString.indexOf('?');
+		if (index != -1) from = index;
+		var search = searchString.substring(from, to);
 	}
 	else {
 		var search = window.location.search;

@@ -5,33 +5,38 @@
 
 body {
 	font-family: avenir, sans-serif;
-	/*height: 100%;
-	margin: 0;
-	padding: 0;
-	*/
 }
 
-h1, h2, h3, p, ul, ol, dl, table, div {
-	/*margin: 1px;
-	padding: 1px;
-	*/
+.nav-glyphish-example .ui-btn .ui-btn-inner { padding-top: 40px !important }
+.nav-glyphish-example .ui-btn .ui-icon {
+    width: 30px!important;
+    height: 30px!important;
+    margin-left: -15px !important;
+    box-shadow: none!important;
+    -moz-box-shadow: none!important;
+    -webkit-box-shadow: none!important;
+    -webkit-border-radius: 0 !important;
+    border-radius: 0 !important;
 }
-
-
-td, th, a, img, span, li, dt, dd, input {
-	/*margin: 0px;
-	padding: 1px;
-	*/
+#map_footer_link .ui-icon {
+ 	background: url(07-map-marker.png) 50% 50% no-repeat;
+ 	background-size: 24px 22px;
 }
-
-a {
-	/*text-decoration: none; */
+#list_footer_link .ui-icon {
+    background: url(104-index-cards.png) 50% 50% no-repeat;
+    background-size: 24px 22px;
 }
-
+#filter_footer_link .ui-icon {
+    background: url(138-scales.png) 50% 50% no-repeat;
+    background-size: 24px 22px;
+}
+#help_footer_link .ui-icon {
+    background: url(30-key.png) 50% 50% no-repeat;
+    background-size: 12px 26px;
+}
 
 #map_canvas {
 	min-width: 320px;
 	min-height: 400px;		
-	width: 90%;
-	
+	width: 90%;	
 }

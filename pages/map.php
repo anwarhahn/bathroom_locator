@@ -16,7 +16,7 @@
 		?>
 	</head>
 	<body>
-		<div data-role="page" data-title="Map" id="map_home">
+		<div data-role="page" data-title="Map" class="map_home">
 			<script src="../assets/javascript/markers.js"></script>
 			<script src="../assets/javascript/bathroomService.js"></script>
 			<script type="text/javascript">
@@ -45,7 +45,16 @@
 				}
 
 				function createMap(options, knownlocation) {
-					var map = new google.maps.Map(document.getElementById("map_canvas"),
+					var maps = $(".map_canvas")[0];
+				/*	console.log(maps);
+					for(var i = 0; i < maps.length; i++) {
+						if (!maps[i].hidden) {
+							console.log(maps[i]);
+							maps = maps[i];
+							break;
+						}
+					}
+				*/	var map = new google.maps.Map(maps,
 							options);
 
 					var manager = new MarkerManager(map);
@@ -112,7 +121,7 @@
 					var footer = $("#footerlist").height();
 					//console.log(document.height + " " + header + " " + footer);
 					//console.log(document.height - footer - header);
-					$("#map_canvas").height(document.height - header - footer - 42);
+					$(".map_canvas").height(document.height - header - footer - 42);
 					if (navigator.geolocation) {
 						navigator.geolocation.getCurrentPosition(success, notsuccess);
 					} else {
@@ -121,21 +130,23 @@
 				}
 
 				var makeFooter = function() {
-					//console.log("making footer");
+					var originParams = escape("?" + stringify_params(get_params()));
 					var links = [
+					{name:"Map", url:"#", icon:"custom"}, 
 					{name:"List", url:"list.php" + query_string(old_params(), {}), icon:"custom"},
 					{name:"Filter", url:"filter.php" + query_string(old_params(), {origin:"map"}), icon:"custom"}, 				
-					{name:"Help", url:"help.php" + query_string(old_params(), {origin:"map"}), icon:"custom"}];
-					SetFooterLinks("#map_home", links);
+					{name:"Help", url:"help.php" + query_string(old_params(), {origin:"map", originParams:originParams}), icon:"custom"}];
+					SetFooterLinks(".map_home", links);
 				}
 
-				$(document).delegate("#map_home", 'pagebeforecreate', function(event) {
+				$(document).delegate(".map_home", 'pagebeforecreate', function(event) {
 					makeFooter();
 				});
 				
-				$(document).delegate("#map_home", 'pageshow', function(event) {
+				$(document).delegate(".map_home", 'pageshow', function(event) {
 		    		disable_safari();
 		    		loadMap();
+		    		$(".map_home #map_footer_link").addClass("ui-btn-active");
 		    	});
 			</script>
 
@@ -144,7 +155,7 @@
 				<a data-role="button" data-mini="true" data-theme="b" data-inline="true" rel="external" href="map.php">Show all</a>
 			</div>
 
-			<div data-role="content" id="map_canvas"></div>
+			<div data-role="content" class="map_canvas"></div>
 
 			<?php
 				require ("footer.php");

@@ -14,18 +14,16 @@
 
 	</head>
 	<body>
-		<div data-role="page" id="list_home">
+		<div data-role="page" class="list_home">
 			<script type="text/javascript">
-				$(document).delegate("#list_home", 'pageshow', function(event) {
+				$(document).delegate(".list_home", 'pageshow', function(event) {
 		    		disable_safari();
 
 	    			var success = function(position, googleMaps) {
 	    				var latLng = null;
 	    				if (googleMaps) latLng = new google.maps.LatLng(position.lat(), position.lng());
 	    				else latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-	    				//console.log(latLng);
 						var list = makeList(latLng);
-						//console.log(list);
 						showList(list);
 					}
 
@@ -34,19 +32,20 @@
 					} else {
 						success(stanfordLatLng);
 					}
+					$(".list_home #list_footer_link").addClass("ui-btn-active");
 				});			
 			
-				//console.log("above making footer");
 				var makeFooter = function() {
-					//console.log("making footer");
+					var originParams = escape("?" + stringify_params(get_params()));
 					var links = [
 					{name:"Map", url:"map.php" + query_string(old_params(), {origin:"list"}), icon:"custom"}, 
+					{name:"List", url:"#", icon:"custom"}, 
 					{name:"Filter", url:"filter.php" + query_string(old_params(), {origin:"list"}), icon:"custom"},
-					{name:"Help", url:"help.php" + query_string(old_params(), {origin:"list"}), icon:"custom"}];
-					SetFooterLinks("#list_home", links);
+					{name:"Help", url:"help.php" + query_string(old_params(), {origin:"list", originParams:originParams}), icon:"custom"}];
+					SetFooterLinks(".list_home", links);
 				}
 
-				$(document).delegate("#list_home", 'pagebeforecreate', function(event) {
+				$(document).delegate(".list_home", 'pagebeforecreate', function(event) {
 					makeFooter();
 				});
 				
