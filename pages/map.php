@@ -23,7 +23,7 @@
 				function success(position) { 
 					var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 				  	var myOptions = {
-				    	zoom: 15,
+				    	zoom: 16,
 				    	center: latlng,
 				    	zoomControl: true,
 						panControl: true,
@@ -36,7 +36,7 @@
 					var stanfordLatLng = new google.maps.LatLng(37.428729,-122.171329);
 					var mapOptions = {
 						center: stanfordLatLng,
-						zoom: 15,
+						zoom: 16,
 						zoomControl: true,
 						panControl: true,
 						mapTypeId: google.maps.MapTypeId.ROADMAP

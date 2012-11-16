@@ -14,9 +14,9 @@ function SetFooterLinks(jqueryPageId, footerobjects){
 		a.setAttribute('href', obj.url);
 		a.setAttribute('id', obj.name.toLowerCase() +"_footer_link");
 		a.setAttribute('data-icon', obj.icon);
-		if (obj.url.indexOf("map.php") == 0) {
-			a.setAttribute('rel', 'external');
-		}
+		
+		a.setAttribute('rel', 'external');
+		
 		a.innerHTML = obj.name;
 	}
 	links.append(ul);

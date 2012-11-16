@@ -37,9 +37,11 @@
 					
 					$(".help_home #help_footer_link").addClass("ui-btn-active");
 					var params = get_params();
-
+					//console.log(params);
 					if (params.originParams) {
+						//console.log(params.originParams);
 						params.originParams = unescape(params.originParams);
+				
 						$("#cancel_link").attr("href", params.origin + ".php" + params.originParams);
 					}
 					else {
@@ -49,7 +51,7 @@
 			</script>
 			<div data-role="header">
 				<h2>Help</h2>
-				<a data-role="button" data-rel="back" data-mini="true" data-inline="true" id="cancel_link">Cancel</a>
+				<a data-role="button" rel="external" data-mini="true" data-inline="true" id="cancel_link">Cancel</a>
 			</div>
 
 			<div data-role="content">

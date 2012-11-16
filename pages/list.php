@@ -16,24 +16,44 @@
 	<body>
 		<div data-role="page" class="list_home">
 			<script type="text/javascript">
+				var updateList = function(position) {
+					var pos = {
+						lat: undefined,
+						lng: undefined
+					}
+					if (!position.coords) {
+						pos.lat = position.lat();
+						pos.lng = position.lng();
+					}
+					else {
+						pos.lat = position.coords.latitude;
+						pos.lng = position.coords.longitude;
+					}
+					var latLng = new google.maps.LatLng(pos.lat, pos.lng);
+					return makeList(latLng);
+				}
+
+				var loadPage = function() {
+				    var callback = function(position) {
+				    	var pos = (typeof position == 'undefined') ? stanfordLatLng : position;
+	    				var list = updateList(pos);
+						var bathroom_list = showList(list);
+						bathroom_list.listview();
+					}
+
+					if (navigator.geolocation) navigator.geolocation.getCurrentPosition(callback, callback);
+					else callback(stanfordLatLng);
+				}
+				$(document).delegate(".list_home", 'pagebeforeshow', function(event) {
+					//$("#bathroom_list");
+				});
 				$(document).delegate(".list_home", 'pageshow', function(event) {
 		    		disable_safari();
-
-	    			var success = function(position, googleMaps) {
-	    				var latLng = null;
-	    				if (googleMaps) latLng = new google.maps.LatLng(position.lat(), position.lng());
-	    				else latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-						var list = makeList(latLng);
-						showList(list);
-					}
-
-					if (navigator.geolocation) {
-						navigator.geolocation.getCurrentPosition(success, function() { success(stanfordLatLng, true); });
-					} else {
-						success(stanfordLatLng);
-					}
-					$(".list_home #list_footer_link").addClass("ui-btn-active");
+		    		//loadPage();
+		    		//$("#bathroom_list").listview();
+		    		//$("#bathroom_list").listview('refresh');
 				});			
+
 			
 				var makeFooter = function() {
 					var originParams = escape("?" + stringify_params(get_params()));
@@ -47,6 +67,7 @@
 
 				$(document).delegate(".list_home", 'pagebeforecreate', function(event) {
 					makeFooter();
+					loadPage();
 				});
 				
 				// default to stanford center
@@ -77,8 +98,8 @@
 						list.push(li);
 
 						$(a).attr('href', (function(name) {
-								return "specificBathroom.php" + query_string(old_params(), {origin:"list", bathroom_id:bathroom.bathroom_id});
-							})(escape(bathroom.name)));
+							return "specificBathroom.php" + query_string(old_params(), {origin:"list", bathroom_id:bathroom.bathroom_id});
+						})(escape(bathroom.name)));
 					}
 					return list;
 				}
@@ -90,10 +111,14 @@
 						li.innerHTML = "No bathrooms match that criteria.";
 						list.push(li);
 					}
-					$("#bathroom_list").append(list).listview();
+					var bathroom_list = $("#bathroom_list");
+					bathroom_list.html('');
+					bathroom_list.append("<li id='bathroom-divider' data-role='list-divider'>Bathrooms</li>");
+					bathroom_list.append(list);
+					return bathroom_list;
 				}
-
 			</script>
+
 			<div data-role="header">
 				<h2>Bathrooms</h2>
 				<a data-role="button" data-mini="true" data-theme="b" rel="external" href="list.php">Show all</a>
@@ -103,7 +128,7 @@
 			<div data-role="content">
 				<div id="list_info"></div>
 				<ul  data-inset="true" data-split-icon="arrow-r" data-split-theme="a" id="bathroom_list">
-					<li id="bathroom-divider" data-role="list-divider">Bathrooms</li>				
+									
 				</ul>
 			</div>
 
