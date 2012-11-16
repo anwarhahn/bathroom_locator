@@ -30,19 +30,20 @@ MarkerManager.prototype.addMarker = function(latLng, name, id)
 						clickable: true
 						});
 	var popup = function() {
-		/*var button = document.createElement("button");
+		var button = document.createElement("button");
 		button.innerHTML = ">";
 		button.onclick = function(evt) {
-			var query = ["bathroom_id=" + escape(id), "origin=" + escape("map")];
-			window.location = "specificBathroom.php?" + query.toString().replace(',', '&');
+			//var query = ["bathroom_id=" + escape(id), "origin=" + escape("map")];
+			//window.location = "specificBathroom.php?" + query.toString().replace(',', '&');
+			window.location = "specificBathroom.php" + query_string(old_params(), {origin:"map", bathroom_id:id});
 		}
-		*/
+		/*
 		var button = document.createElement("a");
 		button.setAttribute("data-role", "button");
 		button.setAttribute("data-icon", "arrow-r");
 		button.innerHTML = ">";
 		button.href = "specificBathroom.php" + query_string(old_params(), {origin:"map", bathroom_id:id});
-
+		*/
 		var p = document.createElement("p");
 		p.innerHTML = name + " ";
 		p.appendChild(button);

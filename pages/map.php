@@ -6,8 +6,7 @@
 		<?php
 			require("header.php");
 		?>
-		<script src="../assets/javascript/markers.js"></script>
-		<script src="../assets/javascript/bathroomService.js"></script>
+		
 		<?php
 		include("../db/data.php");
 		$db = new Data();
@@ -15,136 +14,152 @@
 		#$data = $db->all_json($db->filter(array("name", "bathroom_id", "latitude", "longitude")));
 		$data = $db->all_json();
 		?>
-
-		<script type="text/javascript">
-			function success(position) { 
-				var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-			  	var myOptions = {
-			    	zoom: 15,
-			    	center: latlng,
-			    	zoomControl: true,
-					panControl: true,
-				    mapTypeId: google.maps.MapTypeId.ROADMAP
-				};
-				createMap(myOptions, latlng);
-			}
-				
-			function notsuccess() {
-				var stanfordLatLng = new google.maps.LatLng(37.428729,-122.171329);
-				var mapOptions = {
-					center: stanfordLatLng,
-					zoom: 15,
-					zoomControl: true,
-					panControl: true,
-					mapTypeId: google.maps.MapTypeId.ROADMAP
-				};
-				createMap(mapOptions, null);
-			}
-
-			function createMap(options, knownlocation) {
-				var map = new google.maps.Map(document.getElementById("map_canvas"),
-						options);
-
-				var manager = new MarkerManager(map);
-				var json = <?= $data; ?>;
-				//console.log(json);
-				var filterHash = filter_from_params();
-				var params = get_params();
-
-				for(var i in json) {
-					var bathroom = json[i];
-					if (!matches_filter_requirements(filterHash, bathroom)) 
-						delete json[i];
-					if (params.show == 1) {
-						if (params.bathroom_id != bathroom.bathroom_id)
-							delete json[i];
-						else map.panTo(new google.maps.LatLng(bathroom.latitude, bathroom.longitude));
-					} 
+	</head>
+	<body>
+		<div data-role="page" data-title="Map" class="map_home">
+			<script src="../assets/javascript/markers.js"></script>
+			<script src="../assets/javascript/bathroomService.js"></script>
+			<script type="text/javascript">
+				function success(position) { 
+					var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+				  	var myOptions = {
+				    	zoom: 16,
+				    	center: latlng,
+				    	zoomControl: true,
+						panControl: true,
+					    mapTypeId: google.maps.MapTypeId.ROADMAP
+					};
+					createMap(myOptions, latlng);
+				}
+					
+				function notsuccess() {
+					var stanfordLatLng = new google.maps.LatLng(37.428729,-122.171329);
+					var mapOptions = {
+						center: stanfordLatLng,
+						zoom: 16,
+						zoomControl: true,
+						panControl: true,
+						mapTypeId: google.maps.MapTypeId.ROADMAP
+					};
+					createMap(mapOptions, null);
 				}
 
-				manager.addMarkersFromJSON(json);
-				
-
-				var service = new BathroomService(manager);
-				if(knownlocation!=null){
-					var marker = new google.maps.Marker({
-			    	position: knownlocation, 
-			      	map: map, 
-			      	title:"You are here!",
-			      	icon: "../assets/images/bathroom_pin_30x62.png"
-			  	});
-			}
-
-				function callback(places, status) {
-					if(status == google.maps.places.PlacesServiceStatus.OK) {
-						for (var i = 0; i < places.length; i++) {
-							var place = places[i];
-							var marker = new google.maps.Marker({
-						  		map: map,
-						  		title: place.name,
-						  		position: place.geometry.location,
-						  		visible: true
-							});
-							markers.push(marker);
+				function createMap(options, knownlocation) {
+					var maps = $(".map_canvas")[0];
+				/*	console.log(maps);
+					for(var i = 0; i < maps.length; i++) {
+						if (!maps[i].hidden) {
+							console.log(maps[i]);
+							maps = maps[i];
+							break;
 						}
 					}
-				}
+				*/	var map = new google.maps.Map(maps,
+							options);
 
-				/*var input = document.getElementById('target');
-				input.onchange = function(evt) {
-					var request = {
-						location: stanfordLatLng,
-						query: input.value,
-						radius: 1000
+					var manager = new MarkerManager(map);
+					var json = <?= $data; ?>;
+					//console.log(json);
+					var filterHash = filter_from_params();
+					var params = get_params();
+
+					for(var i in json) {
+						var bathroom = json[i];
+						if (!matches_filter_requirements(filterHash, bathroom)) 
+							delete json[i];
+						if (params.show == 1) {
+							if (params.bathroom_id != bathroom.bathroom_id)
+								delete json[i];
+							else map.panTo(new google.maps.LatLng(bathroom.latitude, bathroom.longitude));
+						} 
 					}
-					service.textSearch(request);
-				}
-				*/
-			}
 
-			function loadMap(){
-				disable_safari();
+					manager.addMarkersFromJSON(json);
+					
 
-				var header = $("#search-panel").height();
-				var footer = $("#footerlist").height();
-				//console.log(document.height + " " + header + " " + footer);
-				//console.log(document.height - footer - header);
-				$("#map_canvas").height(document.height - header - footer - 42);
-				if (navigator.geolocation) {
-					navigator.geolocation.getCurrentPosition(success, notsuccess);
-				} else {
-					notsuccess();
+					var service = new BathroomService(manager);
+					if(knownlocation!=null){
+						var marker = new google.maps.Marker({
+				    	position: knownlocation, 
+				      	map: map, 
+				      	title:"You are here!",
+				      	icon: "../assets/images/bathroom_pin_30x62.png"
+				  	});
 				}
-			}
-			
-		</script>
-	</head>
-	<body onload="loadMap()">
-		<div data-role="page" data-title="Map">
+
+					function callback(places, status) {
+						if(status == google.maps.places.PlacesServiceStatus.OK) {
+							for (var i = 0; i < places.length; i++) {
+								var place = places[i];
+								var marker = new google.maps.Marker({
+							  		map: map,
+							  		title: place.name,
+							  		position: place.geometry.location,
+							  		visible: true
+								});
+								markers.push(marker);
+							}
+						}
+					}
+
+					/*var input = document.getElementById('target');
+					input.onchange = function(evt) {
+						var request = {
+							location: stanfordLatLng,
+							query: input.value,
+							radius: 1000
+						}
+						service.textSearch(request);
+					}
+					*/
+				}
+
+				function loadMap(){
+					disable_safari();
+
+					var header = $("#search-panel").height();
+					var footer = $("#footerlist").height();
+					//console.log(document.height + " " + header + " " + footer);
+					//console.log(document.height - footer - header);
+					$(".map_canvas").height(document.height - header - footer - 42);
+					if (navigator.geolocation) {
+						navigator.geolocation.getCurrentPosition(success, notsuccess);
+					} else {
+						notsuccess();
+					}
+				}
+
+				var makeFooter = function() {
+					var originParams = escape("?" + stringify_params(get_params()));
+					var links = [
+					{name:"Map", url:"#", icon:"custom"}, 
+					{name:"List", url:"list.php" + query_string(old_params(), {}), icon:"custom"},
+					{name:"Filter", url:"filter.php" + query_string(old_params(), {origin:"map"}), icon:"custom"}, 				
+					{name:"Help", url:"help.php" + query_string(old_params(), {origin:"map", originParams:originParams}), icon:"custom"}];
+					SetFooterLinks(".map_home", links);
+				}
+
+				$(document).delegate(".map_home", 'pagebeforecreate', function(event) {
+					makeFooter();
+				});
+				
+				$(document).delegate(".map_home", 'pageshow', function(event) {
+		    		disable_safari();
+		    		loadMap();
+		    		$(".map_home #map_footer_link").addClass("ui-btn-active");
+		    	});
+			</script>
+
 			<div data-role="header" id="search-panel">
 				<h2>Map</h2>
-				<a data-role="button" data-mini="true" data-theme="b" href="map.php">Show all</a>
+				<a data-role="button" data-mini="true" data-theme="b" data-inline="true" rel="external" href="map.php">Show all</a>
 			</div>
 
-			<div data-role="content" id="map_canvas"></div>
+			<div data-role="content" class="map_canvas"></div>
 
 			<?php
 				require ("footer.php");
 			?>
-			<script type="text/javascript">
-				var links = [
-				{name:"List", url:"list.php" + query_string(old_params(), {}), icon:"custom"},
-				{name:"Filter", url:"filter.php" + query_string(old_params(), {origin:"map"}), icon:"custom"}, 				
-				{name:"Help", url:"help.php" + query_string(old_params(), {origin:"map"}), icon:"custom"}];
-				SetFooterLinks(links);
-			</script>
-
-			<!--//OLD-LAYOUT//
-			<a id="help_link" href="help.php?origin=map">Help</a> 
-			<script type="text/javascript">
-				$("#help_link").attr("href", "help.php" + query_string(old_params(), {origin:"map"}));
-			</script>
-			//OLD-LAYOUT//-->
 		</div>
 	</body>
 </html>

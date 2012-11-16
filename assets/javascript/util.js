@@ -1,6 +1,15 @@
-function get_params()
+function get_params(searchString)
 {
-	var search = window.location.search;
+	if (searchString) {
+		var from = 0;
+		var to = searchString.length;
+		var index = searchString.indexOf('?');
+		if (index != -1) from = index;
+		var search = searchString.substring(from, to);
+	}
+	else {
+		var search = window.location.search;
+	}
 	if (search.length == 0) return {};
 
 	search = search.replace('?', '');

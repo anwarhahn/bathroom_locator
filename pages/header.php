@@ -16,7 +16,7 @@
 
 	$jquery_path = $javascript_path."/jquery/";
 	echo "<script src='http://code.jquery.com/jquery-1.8.2.js'></script>";
-	echo "<script src='".$jquery_path."disable_ajax.js'></script>";
+	#echo "<script src='".$jquery_path."disable_ajax.js'></script>";
 	echo "<link rel='stylesheet' href='http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css' />";
 	echo "<script src='http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js'></script>";
 	echo "<script src='".$javascript_path."disable_safari.js'></script>";

@@ -5,19 +5,53 @@
 			require("header.php");
 		?>
 
-		<title id="title"></title>
-		<script type="text/javascript">
-			var params = get_params();
-			params.name = unescape(params.name);
-			$("#title").html("Flush | " + params.name);
-		</script>
+		<title>Flush</title>
 	</head>
 	<body>
-		<div data-role="page" id="home">
+		<div data-role="page" class="bathroom_home">
+			<script type="text/javascript">
+				var makeFooter = function() {
+					var originParams = escape("?" + stringify_params(get_params()));
+					var links = [
+					{name:"Map", url:"map.php" + query_string(old_params(), {origin:"specificBathroom"}), icon:"custom"}, 
+					{name:"List", url:"list.php" + query_string(old_params(), {origin:"specificBathroom"}), icon:"custom"},
+					{name:"Filter", url:"filter.php" + query_string(old_params(), {origin:"specificBathroom"}), icon:"custom"}, 				
+					{name:"Help", url:"help.php" + query_string({}, {origin:"specificBathroom", originParams:originParams}), icon:"custom"}];
+					SetFooterLinks(".bathroom_home", links);
+				}
+
+				$(document).delegate(".bathroom_home", 'pagebeforecreate', function(event) {
+					makeFooter();
+				});
+
+				$(document).delegate(".bathroom_home", 'pageshow', function(event) {
+        			disable_safari();
+        			var params = get_params();
+					$("#back_link").attr("href", params.origin + ".php" + query_string(old_params(), {origin:"specificBathroom"}));
+					$("#show_link").attr("href", "map.php" + query_string({bathroom_id:params.bathroom_id}, {show:1}));
+
+					var amenities = bathroom_amenities(bathroom);
+					var amentitiesList = $("#amenities_list");
+					for(var p in amenities) {
+						amentitiesList.append("<li>" + p + "</li>");
+					}
+					amentitiesList.listview();
+					amentitiesList.listview('refresh');
+
+    				var address = human_readable_address(bathroom);
+    				if (address.length > 0) {
+						$("#address_goes_here").html(address);
+					}
+					else {
+						$("#address_goes_here").html("There is no address at this time.");
+					}
+    			});
+			</script>
+
 			<div data-role="header">
-				<h2 id="h1_title"></h2>
-				<a id="back_link" data-role="button" data-mini="true" data-inline="true">Back</a>
-				<a id="help_link" data-role="button" data-mini="true" data-inline="true">Help</a>
+				<h2>Bathroom</h2>
+				<a id="back_link" data-rel="back" data-role="button" data-mini="true">Back</a>
+				
 
 				<?php
 				include("../db/data.php");
@@ -27,52 +61,38 @@
 				?>
 				<script type="text/javascript">
 					var bathroom = <?= $data; ?>;
-					//console.log(bathroom);
-					$("#h1_title").html(bathroom.name);
 				</script>
 			</div>
 
-		<div data-role="content">
-			
+			<div data-role="content">
+				<div>
+					<ul data-inset='true' data-role='listview'>
+						<li data-role='list-divider'>Name</li>
+						<li><div><?= $bathroom['name'] ?></div></li>
+					</ul>
+				</div>
 
-			<div>
-				<ul data-inset='true' data-role='listview' id="address_list">
-					<li data-role='list-divider'>Address</li>
-					<script type="text/javascript">
-					var address = human_readable_address(bathroom);
-					//console.log(address);
-					var link = "<a id='show_link' data-mini='true' data-inline='true' data-role='button' href='#' >Show on map</a>";
-					$("#address_list").append("<li><span>"+address+"</span><span>"+ link +"</span></li>");
-					</script>
-				</ul>
+				<div>
+					<ul data-inset='true' data-role='listview' id="address_list">
+						<li data-role='list-divider'>Address</li>
+						<li>
+							<div id="address_goes_here"></div>
+							<div>
+								<a id='show_link' data-mini='true' data-inline='true' data-role='button' href='#' >Show on map</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div>
+					<ul id="amenities_list" data-inset='true' data-role='listview'>
+						<li data-role='list-divider'>Amenities</li>
+					</ul>
+				</div>			
 			</div>
-			<div>
-				<script type="text/javascript">
-				var amenities = bathroom_amenities(bathroom);
-				//console.log(amenities);
-				document.write("<ul data-inset='true' data-role='listview'>");
-				document.write("<li data-role='list-divider'>Amenities</li>")
-				for(var p in amenities) {
-					//console.log(p);
-					document.write("<li>" + p + "</li>");
-				}
-				document.write("</ul>");
-				</script>
-			</div>
-		
-			<script type="text/javascript">
-				var params = get_params();
-				$("#back_link").attr("href", params.origin + ".php" + query_string(old_params(), {origin:"specificBathroom"}));
-				
-				var originParams = escape("?" + stringify_params(params));
-				$("#help_link").attr("href", "help.php" + query_string({}, {origin:"specificBathroom", originParams:originParams}));
 
-				$("#show_link").attr("href", "map.php" + query_string({bathroom_id:params.bathroom_id}, {show:1}));
-
-				$("#home").live('pageinit',function() {
-        			disable_safari();
-    			});
-
-			</script>
+			<?php
+				require ("footer.php");
+			?>
+		</div>
 	</body>
 </html>
