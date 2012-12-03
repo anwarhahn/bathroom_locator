@@ -95,7 +95,9 @@
 							  		map: map,
 							  		title: place.name,
 							  		position: place.geometry.location,
-							  		visible: true
+							  		visible: true,
+							  		icon: "../assets/images/blue.png"
+
 								});
 								markers.push(marker);
 							}
@@ -123,7 +125,7 @@
 					//console.log(document.height - footer - header);
 					$(".map_canvas").height(document.height - header - footer - 42);
 					if (navigator.geolocation) {
-						navigator.geolocation.getCurrentPosition(success, notsuccess);
+						navigator.geolocation.getCurrentPosition(notsuccess, notsuccess);
 					} else {
 						notsuccess();
 					}
