@@ -6,10 +6,9 @@
 			require("header.php");
 			include("../db/data.php");
 			$db = new Data();
-			$db->refresh_all();
-			#$filtered = $db->filter(array("name", "latitude", "longitude"));
-			#$data = $db->all_json($filtered);
-			$data = $db->all_json();
+			$properties = [];
+			$buildings = $db->all_buildings_that_match($properties);
+			$data = $db->all_json($buildings);
 		?>
 
 	</head>
@@ -37,21 +36,21 @@
 				    var callback = function(position) {
 				    	var pos = (typeof position == 'undefined') ? stanfordLatLng : position;
 	    				var list = updateList(pos);
-						var bathroom_list = showList(list);
-						bathroom_list.listview();
+						var building_list = showList(list);
+						building_list.listview();
 					}
 
 					if (navigator.geolocation) navigator.geolocation.getCurrentPosition(callback, callback);
 					else callback(stanfordLatLng);
 				}
 				$(document).delegate(".list_home", 'pagebeforeshow', function(event) {
-					//$("#bathroom_list");
+					//$("#building_list");
 				});
 				$(document).delegate(".list_home", 'pageshow', function(event) {
 		    		disable_safari();
 		    		//loadPage();
-		    		//$("#bathroom_list").listview();
-		    		//$("#bathroom_list").listview('refresh');
+		    		//$("#building_list").listview();
+		    		//$("#building_list").listview('refresh');
 				});			
 
 			
@@ -75,31 +74,30 @@
 				
 				var makeList = function(position) {
 					var list = [];	
-					var bathroom_data = <?= $data; ?>;
+					var building_data = <?= $data; ?>;
+					console.log(building_data);
 					var bList = [];
 					var filterHash = filter_from_params();
-					for(var i in bathroom_data) {
-						var bathroom = bathroom_data[i];
-						//console.log(bathroom);
-						if (!matches_filter_requirements(filterHash, bathroom)) continue;
-						var loc = new google.maps.LatLng(bathroom.latitude, bathroom.longitude);
-						bathroom.dist = google.maps.geometry.spherical.computeDistanceBetween(position, loc);
-						bList.push(bathroom);
+					for(var i in building_data) {
+						var building = building_data[i];
+						var loc = new google.maps.LatLng(building.Latitude, building.Longitude);
+						building.dist = google.maps.geometry.spherical.computeDistanceBetween(position, loc);
+						bList.push(building);
 					}
 					bList.sort(function(a, b) { return (a.dist - b.dist); });
 
 					for(var i = 0; i < bList.length; i++) {
-						var bathroom = bList[i];
+						var building = bList[i];
 						var li = document.createElement("li");
 						var a = document.createElement("a");
-						a.innerHTML = "<h3>" + (i+1) + ". " +bathroom.name + "</h3><p>"+bathroom.dist.toPrecision(4)+" meters away</p>";
+						a.innerHTML = "<h3>" + (i+1) + ". " +building.Building_Name + "</h3><p>"+building.dist.toPrecision(4)+" meters away</p>";
 						a.setAttribute('rel', 'external');
 						li.appendChild(a);
 						list.push(li);
 
 						$(a).attr('href', (function(name) {
-							return "specificBathroom.php" + query_string(old_params(), {origin:"list", bathroom_id:bathroom.bathroom_id});
-						})(escape(bathroom.name)));
+							return "specificbuilding.php" + query_string(old_params(), {origin:"list", Building_Number:building.Building_Number});
+						})(escape(building.name)));
 					}
 					return list;
 				}
@@ -108,26 +106,26 @@
 					$("#list_info").html("Showing "+list.length+" of <?= $db->table_size() ?>");
 					if (list.length == 0) {
 						var li = document.createElement("li");
-						li.innerHTML = "No bathrooms match that criteria.";
+						li.innerHTML = "No buildings match that criteria.";
 						list.push(li);
 					}
-					var bathroom_list = $("#bathroom_list");
-					bathroom_list.html('');
-					bathroom_list.append("<li id='bathroom-divider' data-role='list-divider'>Bathrooms</li>");
-					bathroom_list.append(list);
-					return bathroom_list;
+					var building_list = $("#building_list");
+					building_list.html('');
+					building_list.append("<li id='building-divider' data-role='list-divider'>buildings</li>");
+					building_list.append(list);
+					return building_list;
 				}
 			</script>
 
 			<div data-role="header">
-				<h2>Bathrooms</h2>
+				<h2>Buildings</h2>
 				<a data-role="button" data-mini="true" data-theme="b" rel="external" href="list.php">Show all</a>
 			</div>
 
 
 			<div data-role="content">
 				<div id="list_info"></div>
-				<ul  data-inset="true" data-split-icon="arrow-r" data-split-theme="a" id="bathroom_list">
+				<ul  data-inset="true" data-split-icon="arrow-r" data-split-theme="a" id="building_list">
 									
 				</ul>
 			</div>
