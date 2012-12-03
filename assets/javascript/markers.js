@@ -9,8 +9,8 @@ MarkerManager.prototype.addMarkersFromJSON = function(json)
 {
 	for (var arrayPos in json) {
 		var elem = json[arrayPos];
-		var latLng = this.makeLatLng(elem.latitude, elem.longitude);
-		this.addMarker(latLng, elem.name, elem.bathroom_id);
+		var latLng = this.makeLatLng(elem.Latitude, elem.Longitude);
+		this.addMarker(latLng, elem.Building_Name, elem.Building_Number);
 	}
 }
 
@@ -36,7 +36,7 @@ MarkerManager.prototype.addMarker = function(latLng, name, id)
 		button.onclick = function(evt) {
 			//var query = ["bathroom_id=" + escape(id), "origin=" + escape("map")];
 			//window.location = "specificBathroom.php?" + query.toString().replace(',', '&');
-			window.location = "specificBathroom.php" + query_string(old_params(), {origin:"map", bathroom_id:id});
+			window.location = "specificBuilding.php" + query_string(old_params(), {origin:"map", Building_Number:id});
 		}
 		/*
 		var button = document.createElement("a");
