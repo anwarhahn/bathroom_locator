@@ -5,14 +5,11 @@
 		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />		
 		<?php
 			require("header.php");
-		?>
-		
-		<?php
-		include("../db/data.php");
-		$db = new Data();
-		$db->refresh_all();
-		#$data = $db->all_json($db->filter(array("name", "bathroom_id", "latitude", "longitude")));
-		$data = $db->all_json();
+			include("../db/data.php");
+			$db = new Data();
+			$properties = array();
+			$buildings = $db->all_buildings_that_match($properties);
+			$data = $db->all_json($buildings);
 		?>
 	</head>
 	<body>
@@ -64,16 +61,16 @@
 					var params = get_params();
 
 					for(var i in json) {
-						var bathroom = json[i];
-						if (!matches_filter_requirements(filterHash, bathroom)) 
+						var building = json[i];
+						if (!matches_filter_requirements(filterHash, building)) 
 							delete json[i];
 						if (params.show == 1) {
-							if (params.bathroom_id != bathroom.bathroom_id)
+							if (params.Building_Number != building.Building_Number)
 								delete json[i];
-							else map.panTo(new google.maps.LatLng(bathroom.latitude, bathroom.longitude));
+							else map.panTo(new google.maps.LatLng(building.Latitude, building.Longitude));
 						} 
 					}
-
+					
 					manager.addMarkersFromJSON(json);
 					
 
@@ -95,7 +92,9 @@
 							  		map: map,
 							  		title: place.name,
 							  		position: place.geometry.location,
-							  		visible: true
+							  		visible: true,
+							  		icon: "../assets/images/blue.png"
+
 								});
 								markers.push(marker);
 							}
@@ -123,7 +122,7 @@
 					//console.log(document.height - footer - header);
 					$(".map_canvas").height(document.height - header - footer - 42);
 					if (navigator.geolocation) {
-						navigator.geolocation.getCurrentPosition(success, notsuccess);
+						navigator.geolocation.getCurrentPosition(notsuccess, notsuccess);
 					} else {
 						notsuccess();
 					}

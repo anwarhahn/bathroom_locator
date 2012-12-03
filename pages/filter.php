@@ -100,8 +100,7 @@
 					   		<label for="checkbox-2">Female</label>
 					   		<input type="checkbox" name="handicap" value="1" id="checkbox-3" class="custom" />
 					   		<label for="checkbox-3">Accessible</label>
-					   		<input type="checkbox" name="babychanging" value="1" id="checkbox-4" class="custom" />
-					   		<label for="checkbox-4">Changing Table</label>
+					   	
 			   			 </fieldset>
 			   		</div>
 			   		<button id="submit_button" type="button" data-theme="a">Filter Bathrooms</button>

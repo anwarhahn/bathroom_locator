@@ -6,7 +6,7 @@
 			require("header.php");
 			include("../db/data.php");
 			$db = new Data();
-			$properties = [];
+			$properties = array();
 			$buildings = $db->all_buildings_that_match($properties);
 			$data = $db->all_json($buildings);
 		?>
@@ -51,6 +51,7 @@
 		    		//loadPage();
 		    		//$("#building_list").listview();
 		    		//$("#building_list").listview('refresh');
+		    		$(".list_home #list_footer_link").addClass("ui-btn-active");
 				});			
 
 			

@@ -27,8 +27,8 @@ body {
     background-size: 24px 22px;
 }
 #filter_footer_link .ui-icon {
-    background: url(138-scales.png) 50% 50% no-repeat;
-    background-size: 24px 22px;
+    background: url(111-filter.png) 50% 50% no-repeat;
+    background-size: 35px 30px;
 }
 #help_footer_link .ui-icon {
     background: url(30-key.png) 50% 50% no-repeat;
@@ -39,5 +39,25 @@ body {
 	min-width: 320px;
 	min-height: 400px;		
 	width: 90%;	
+}
+
+
+#woman_icon_help{
+    width: 30px;
+    height: 30px;
+    background: url(woman-icon.png) 50% 50% no-repeat;
+    background-size: 30px 30px;
+}
+#man_icon_help{
+    width: 30px;
+    height: 30px;
+    background: url(man-icon.png) 50% 50% no-repeat;
+    background-size: 30px 30px;
+}
+#handicap_icon_help{
+    width: 30px;
+    height: 30px;
+    background: url(handicap-icon.png) 50% 50% no-repeat;
+    background-size: 30px 30px;
 }
 

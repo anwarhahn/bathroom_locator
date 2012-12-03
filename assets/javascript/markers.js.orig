@@ -9,8 +9,8 @@ MarkerManager.prototype.addMarkersFromJSON = function(json)
 {
 	for (var arrayPos in json) {
 		var elem = json[arrayPos];
-		var latLng = this.makeLatLng(elem.Latitude, elem.Longitude);
-		this.addMarker(latLng, elem.Building_Name, elem.Building_Number);
+		var latLng = this.makeLatLng(elem.latitude, elem.longitude);
+		this.addMarker(latLng, elem.name, elem.bathroom_id);
 	}
 }
 
@@ -27,24 +27,20 @@ MarkerManager.prototype.addMarker = function(latLng, name, id)
 						title: name,
 						position: latLng,
 						visible: true,
-						clickable: true,
-						icon: "../assets/images/blue.png"
+						clickable: true
 						});
 	var popup = function() {
 		var button = document.createElement("button");
 		button.innerHTML = ">";
 		button.onclick = function(evt) {
-			//var query = ["bathroom_id=" + escape(id), "origin=" + escape("map")];
-			//window.location = "specificBathroom.php?" + query.toString().replace(',', '&');
-			window.location = "specificBuilding.php" + query_string(old_params(), {origin:"map", Building_Number:id});
+<<<<<<< HEAD
+			var query = ["bathroom_id=" + escape(id), "origin=" + escape("map")];
+=======
+			var query = ["name=" + escape(name), "origin=" + escape("map")];
+
+>>>>>>> michelle
+			window.location = "specificBathroom.php?" + query.toString().replace(',', '&');
 		}
-		/*
-		var button = document.createElement("a");
-		button.setAttribute("data-role", "button");
-		button.setAttribute("data-icon", "arrow-r");
-		button.innerHTML = ">";
-		button.href = "specificBathroom.php" + query_string(old_params(), {origin:"map", bathroom_id:id});
-		*/
 		var p = document.createElement("p");
 		p.innerHTML = name + " ";
 		p.appendChild(button);

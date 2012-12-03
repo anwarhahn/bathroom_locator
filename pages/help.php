@@ -55,36 +55,26 @@
 			</div>
 
 			<div data-role="content">
-				<p>Welcome to <b>Flush</b>!  It's our goal to make it as easy as
-					possible for you to find bathrooms, when and where you need them.</p>
-				<h2>From the map view:</h2>
-				<p>The map will automatically find your location and display the
-					bathrooms nearby on the map.  Click on them for more information.
-					Feel free to search for a new address or drag the map around.</p>
-				<h2>From the list view:</h2>
-				<p>The map will automatically find your location and display the
-					bathrooms in a list, sorted by distance.  Click on them for more
-					information.  Feel free to search for a new address as well.</p>
-				<h2>Filtering:</h2>
-				<p>You can filter your search by narrowing everything down baseed on
-					the amenities they offer.  Click on the corresponding image to
-					select it.  You can select as many as you want!</p>
+				<p>Welcome to <b>Flush</b>!</p>  
+
+				<p>Find bathrooms, when and where you need them.</p>
+
+				<p>Flush automatically finds your location and displays the nearby buildings with public bathrooms.</p>
+
+				<p>Filter your search by gender or handicap accessibility.
+					Use the "Show All" button to clear the filter, or go back to the filter page to re-filter.</p>
 				<table>
 					<tr>
-						<td>[add icon here]</td>
+						<td id = "man_icon_help"></td>
 						<td>Male</td>
 					</tr>
 					<tr>
-						<td>[add icon here]</td>
+						<td id = "woman_icon_help"></td>
 						<td>Female</td>
 					</tr>
 					<tr>
-						<td>[add icon here]</td>
+						<td id = "handicap_icon_help"></td>
 						<td>Handicap Accessible</td>
-					</tr>
-					<tr>
-						<td>[add icon here]</td>
-						<td>Changing Table</td>
 					</tr>
 				</table>
 			</div>
