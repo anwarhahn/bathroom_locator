@@ -96,7 +96,7 @@
 						list.push(li);
 
 						$(a).attr('href', (function(name) {
-							return "specificbuilding.php" + query_string(old_params(), {origin:"list", Building_Number:building.Building_Number});
+							return "specificBuilding.php" + query_string(old_params(), {origin:"list", Building_Number:building.Building_Number});
 						})(escape(building.name)));
 					}
 					return list;
