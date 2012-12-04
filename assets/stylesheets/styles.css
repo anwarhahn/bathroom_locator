@@ -41,20 +41,25 @@ body {
 	width: 90%;	
 }
 
-
-#woman_icon_help{
+.icons {
+    height: 15px;
+}
+.woman_icon_help{
+    float: left;
     width: 30px;
     height: 30px;
     background: url(woman-icon.png) 50% 50% no-repeat;
     background-size: 30px 30px;
 }
-#man_icon_help{
+.man_icon_help{
+    float: left;
     width: 30px;
     height: 30px;
     background: url(man-icon.png) 50% 50% no-repeat;
     background-size: 30px 30px;
 }
-#handicap_icon_help{
+.handicap_icon_help{
+    float: left;
     width: 30px;
     height: 30px;
     background: url(handicap-icon.png) 50% 50% no-repeat;

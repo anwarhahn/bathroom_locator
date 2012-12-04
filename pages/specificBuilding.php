@@ -34,8 +34,28 @@
 					for(var bathroomIndex in building.bathrooms) {
 						var bathroom = building.bathrooms[bathroomIndex];
 						var location = "<p>"+"Floor: " + bathroom.Floor + ", Room: " + bathroom.Room_Number + "</p>";
-						var gender = "<p>" + bathroom.Gender + "</p>";
-						bathroomsList.append("<li>" + gender + location + "</li>");
+
+
+						var male = "<p class='man_icon_help'></p>";
+						var female = "<p class='woman_icon_help'></p>";
+						var gender = "";
+						if (bathroom.Gender == "MENS") {
+							gender += male;
+						}
+						else if (bathroom.Gender == "WOMENS") {
+							gender += female;
+						}
+						else if (bathroom.Gender == "UNISEX") {
+							gender += male + female;
+						}
+
+						var handicap = "";
+						if (bathroom.Handicap == "1") {
+							handicap = "<p class='handicap_icon_help'></p>";
+						}
+
+						gender = "<p class='icons'>" + gender + "</p>";
+						bathroomsList.append("<li>" + gender + handicap + location + "</li>");
 					}
 					bathroomsList.listview();
 					bathroomsList.listview('refresh');

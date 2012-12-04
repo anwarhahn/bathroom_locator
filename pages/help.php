@@ -65,15 +65,15 @@
 					Use the "Show All" button to clear the filter, or go back to the filter page to re-filter.</p>
 				<table>
 					<tr>
-						<td id = "man_icon_help"></td>
+						<td class = "man_icon_help"></td>
 						<td>Male</td>
 					</tr>
 					<tr>
-						<td id = "woman_icon_help"></td>
+						<td class = "woman_icon_help"></td>
 						<td>Female</td>
 					</tr>
 					<tr>
-						<td id = "handicap_icon_help"></td>
+						<td class = "handicap_icon_help"></td>
 						<td>Handicap Accessible</td>
 					</tr>
 				</table>
