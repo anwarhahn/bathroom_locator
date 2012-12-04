@@ -22,7 +22,8 @@ class Data {
 			while ($row = mysql_fetch_assoc($result)) {
 				$myarray->append($row);
 			}
-			$this->keys = array_keys($myarray[0]);
+			if (count($myarray) > 0)
+				$this->keys = array_keys($myarray[0]);
 			$this->array = $myarray;
 		}
 	}
@@ -65,7 +66,32 @@ class Data {
 	}
 
 	function all_buildings_that_match($properties) {
-		$sql_query = "select * from Buildings";
+		$sql_query = "select distinct * from Buildings";
+		if (count($properties) > 0) {
+			$sql_query .= ", Bathrooms where ";
+			$constraints = array();
+			$ismale = array_key_exists("male", $properties);
+			$isfemale = array_key_exists("female", $properties);
+			$ishandicap = array_key_exists("handicap", $properties);
+
+			if ($isfemale && $ismale) {
+				// don't constrain gender
+			}
+			else {
+				if ($isfemale && !$ismale) {
+					$constraints[] = "Bathrooms.Gender='FEMALE' or Bathrooms.Gender='UNISEX'";	
+				}
+				if (!$isfemale && !$ismale) {
+					$constraints[] = "Bathrooms.Gender='FEMALE' or Bathrooms.Gender='UNISEX'";	
+				}
+			}
+			if ($ishandicap) {
+				$constraints[] = "Bathrooms.Handicap='1'";
+			}
+			$constraints[] = "Buildings.Building_Number=Bathrooms.Building_Number";
+			$sql_query .= implode(" and ", $constraints);
+		}
+		//echo $sql_query;
 		$this->refresh($sql_query);
 		return $this->array;
 	}
@@ -84,11 +110,16 @@ class Data {
 	}
 
 	function getFilter() {
+		$filter = array();
+		$urldecoded = "";
 		foreach ($_GET as $key => $value) {
-			echo $key."=>".$value."\n";
+			if ($key == "form") {
+				$form = urldecode($value);
+				$filter = json_decode($form, true);
+				break;
+			}
 		}
-		
-		return array();
+		return $filter;
 	}
 }
 ?>
