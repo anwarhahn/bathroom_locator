@@ -36,8 +36,8 @@
 						var location = "<p>"+"Floor: " + bathroom.Floor + ", Room: " + bathroom.Room_Number + "</p>";
 
 
-						var male = "<p class='man_icon_help'></p>";
-						var female = "<p class='woman_icon_help'></p>";
+						var male = "<p class='man_icon_building'></p>";
+						var female = "<p class='woman_icon_building'></p>";
 						var gender = "";
 						if (bathroom.Gender == "MENS") {
 							gender += male;
@@ -51,7 +51,7 @@
 
 						var handicap = "";
 						if (bathroom.Handicap == "1") {
-							handicap = "<p class='handicap_icon_help'></p>";
+							handicap = "<p class='handicap_icon_building'></p>";
 						}
 
 						gender = "<p class='icons'>" + gender + "</p>";
