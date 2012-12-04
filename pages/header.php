@@ -1,9 +1,9 @@
 <?php
 	$asset_path = "../assets/";
-
-	echo "<link rel='apple-touch-icon' href='".$asset_path."/images/appicon.png' />";
-	echo "<link rel='apple-touch-startup-image' href='".$asset_path."/images/appicon.png'>";
 	echo "<meta name='apple-mobile-web-app-capable' content='yes'>";
+	echo "<link rel='apple-touch-icon' href='".$asset_path."images/appicon.png' />";
+	echo "<link rel='apple-touch-startup-image' href='".$asset_path."images/appicon2.png' />";
+
 	echo "<meta name='apple-mobile-webapp-status-bar-style' content='black'>";
 	echo "<meta name='viewport' content='width=device-width, user-scalable=no' />";
 
