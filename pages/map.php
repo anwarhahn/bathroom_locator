@@ -43,30 +43,20 @@
 
 				function createMap(options, knownlocation) {
 					var maps = $(".map_canvas")[0];
-				/*	console.log(maps);
-					for(var i = 0; i < maps.length; i++) {
-						if (!maps[i].hidden) {
-							console.log(maps[i]);
-							maps = maps[i];
-							break;
-						}
-					}
-				*/	var map = new google.maps.Map(maps,
+					var map = new google.maps.Map(maps,
 							options);
 
 					var manager = new MarkerManager(map);
 					var json = <?= $data; ?>;
-					//console.log(json);
 					var filterHash = filter_from_params();
 					var params = get_params();
 
 					for(var i in json) {
 						var building = json[i];
-						if (!matches_filter_requirements(filterHash, building)) 
-							delete json[i];
 						if (params.show == 1) {
-							if (params.Building_Number != building.Building_Number)
+							if (params.Building_Number != building.Building_Number) {
 								delete json[i];
+							}
 							else map.panTo(new google.maps.LatLng(building.Latitude, building.Longitude));
 						} 
 					}
@@ -100,17 +90,6 @@
 							}
 						}
 					}
-
-					/*var input = document.getElementById('target');
-					input.onchange = function(evt) {
-						var request = {
-							location: stanfordLatLng,
-							query: input.value,
-							radius: 1000
-						}
-						service.textSearch(request);
-					}
-					*/
 				}
 
 				function loadMap(){
@@ -118,8 +97,6 @@
 
 					var header = $("#search-panel").height();
 					var footer = $("#footerlist").height();
-					//console.log(document.height + " " + header + " " + footer);
-					//console.log(document.height - footer - header);
 					$(".map_canvas").height(document.height - header - footer - 42);
 					if (navigator.geolocation) {
 						navigator.geolocation.getCurrentPosition(notsuccess, notsuccess);

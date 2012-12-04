@@ -27,8 +27,7 @@
 					$("#cancel_link").attr("href", params.origin + ".php" + query_string(old_params(), {origin:"filter"}));
 
 					var form = document.getElementById("filter_form");
-					form.action = (params.origin == undefined || params.origin == 'filter') ? 'list.php': params.origin + '.php';
-					//console.log(form.action);
+					form.action = (params.origin == "map" || params.origin == 'list') ? params.origin + '.php' : "list.php";
 				});
 
 				$(document).delegate(".filter_home", 'pageshow', function(event) {

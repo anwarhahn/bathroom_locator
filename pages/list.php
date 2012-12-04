@@ -43,14 +43,9 @@
 					if (navigator.geolocation) navigator.geolocation.getCurrentPosition(callback, callback);
 					else callback(stanfordLatLng);
 				}
-				$(document).delegate(".list_home", 'pagebeforeshow', function(event) {
-					//$("#building_list");
-				});
+				$(document).delegate(".list_home", 'pagebeforeshow', function(event) {});
 				$(document).delegate(".list_home", 'pageshow', function(event) {
 		    		disable_safari();
-		    		//loadPage();
-		    		//$("#building_list").listview();
-		    		//$("#building_list").listview('refresh');
 		    		$(".list_home #list_footer_link").addClass("ui-btn-active");
 				});			
 
@@ -76,7 +71,7 @@
 				var makeList = function(position) {
 					var list = [];	
 					var building_data = <?= $data; ?>;
-					console.log(building_data);
+					
 					var bList = [];
 					var filterHash = filter_from_params();
 					for(var i in building_data) {
@@ -143,9 +138,7 @@
     				var latLng = null;
     				if (googleMaps) latLng = new google.maps.LatLng(position.lat(), position.lng());
     				else latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-    				//console.log(latLng);
 					var list = makeList(latLng);
-					//console.log(list);
 					showList(list);
 				}
 

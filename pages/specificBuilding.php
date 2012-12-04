@@ -86,7 +86,6 @@
 				?>
 				<script type="text/javascript">
 					var building = <?= $data; ?>;
-					console.log(building);
 				</script>
 			</div>
 
