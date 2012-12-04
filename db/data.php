@@ -66,32 +66,43 @@ class Data {
 	}
 
 	function all_buildings_that_match($properties) {
-		$sql_query = "select distinct * from Buildings";
+		$sql_query = "select distinct Buildings.Building_Number, Buildings.Building_Name, Buildings.Address, Buildings.Latitude, Buildings.Longitude from Buildings";
 		if (count($properties) > 0) {
-			$sql_query .= ", Bathrooms where ";
+			$add_on = ", Bathrooms where ";
 			$constraints = array();
 			$ismale = array_key_exists("male", $properties);
 			$isfemale = array_key_exists("female", $properties);
 			$ishandicap = array_key_exists("handicap", $properties);
+
+			echo var_dump($properties);
 
 			if ($isfemale && $ismale) {
 				// don't constrain gender
 			}
 			else {
 				if ($isfemale && !$ismale) {
-					$constraints[] = "Bathrooms.Gender='FEMALE' or Bathrooms.Gender='UNISEX'";	
+					$constraints[] = "(Bathrooms.Gender='WOMENS' or Bathrooms.Gender='UNISEX')";	
 				}
-				if (!$isfemale && !$ismale) {
-					$constraints[] = "Bathrooms.Gender='FEMALE' or Bathrooms.Gender='UNISEX'";	
+				if (!$isfemale && $ismale) {
+					$constraints[] = "(Bathrooms.Gender='MENS' or Bathrooms.Gender='UNISEX')";	
 				}
 			}
 			if ($ishandicap) {
-				$constraints[] = "Bathrooms.Handicap='1'";
+				$constraints[] = "(Bathrooms.Handicap='1')";
 			}
-			$constraints[] = "Buildings.Building_Number=Bathrooms.Building_Number";
-			$sql_query .= implode(" and ", $constraints);
+
+
+			if (count($constraints) > 0) {
+				$constraints[] = "(Buildings.Building_Number=Bathrooms.Building_Number)";
+			}		
+			
+			if (count($constraints) > 0) {
+				$sql_query .= $add_on.implode(" and ", $constraints);	
+			}
+
 		}
-		//echo $sql_query;
+
+		echo $sql_query;
 		$this->refresh($sql_query);
 		return $this->array;
 	}
@@ -115,7 +126,10 @@ class Data {
 		foreach ($_GET as $key => $value) {
 			if ($key == "form") {
 				$form = urldecode($value);
+				$form = str_replace("\\", "", $form);
+				
 				$filter = json_decode($form, true);
+			
 				break;
 			}
 		}

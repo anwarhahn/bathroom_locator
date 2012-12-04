@@ -49,14 +49,14 @@ body {
     width: 45px;
     height: 45px;
     background: url(woman-icon.png) 50% 50% no-repeat;
-    background-size: contain;
+    background-size: 47px 47px;
 }
 .man_icon_building{
     float: left;
     width: 45px;
     height: 45px;
     background: url(man-icon.png) 50% 50% no-repeat;
-    background-size: contain;
+    background-size: 44px 44px;
 }
 .handicap_icon_building{
     float: left;

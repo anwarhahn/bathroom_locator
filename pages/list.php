@@ -107,7 +107,7 @@
 					}
 					var building_list = $("#building_list");
 					building_list.html('');
-					building_list.append("<li id='building-divider' data-role='list-divider'>buildings</li>");
+					building_list.append("<li id='building-divider' data-role='list-divider'>Buildings</li>");
 					building_list.append(list);
 					return building_list;
 				}
