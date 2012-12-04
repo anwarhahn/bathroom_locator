@@ -42,7 +42,7 @@ body {
 }
 
 .icons {
-    height: 15px;
+    height:45px;
 }
 .woman_icon_building{
     float: left;
@@ -65,6 +65,7 @@ body {
     background: url(handicap-icon.png) 50% 50% no-repeat;
     background-size: 47px 47px;
 }
+
 
 
 .woman_icon_help{

@@ -36,8 +36,8 @@
 						var location = "<p>"+"Floor: " + bathroom.Floor + ", Room: " + bathroom.Room_Number + "</p>";
 
 
-						var male = "<p class='man_icon_building'></p>";
-						var female = "<p class='woman_icon_building'></p>";
+						var male = "<td class='man_icon_building' class = 'icons'></td>";
+						var female = "<td class='woman_icon_building' class = 'icons'></td>";
 						var gender = "";
 						if (bathroom.Gender == "MENS") {
 							gender += male;
@@ -51,11 +51,10 @@
 
 						var handicap = "";
 						if (bathroom.Handicap == "1") {
-							handicap = "<p class='handicap_icon_building'></p>";
+							handicap = "<td class='handicap_icon_building' class = 'icons'><td>";
 						}
 
-						gender = "<p class='icons'>" + gender + "</p>";
-						bathroomsList.append("<li>" + gender + handicap + location + "</li>");
+						bathroomsList.append("<li>" + location + "<table><tr>" + gender + handicap + "</tr></table>" + "</li>");
 					}
 					bathroomsList.listview();
 					bathroomsList.listview('refresh');
