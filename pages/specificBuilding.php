@@ -28,7 +28,7 @@
         			disable_safari();
         			var params = get_params();
 					$("#back_link").attr("href", params.origin + ".php" + query_string(old_params(), {origin:"specificBuilding"}));
-					$("#show_link").attr("href", "map.php" + query_string({building_id:params.building_id}, {show:1}));
+					$("#show_link").attr("href", "map.php" + query_string({Building_Number:params.Building_Number}, {show:1}));
 
 					var bathroomsList = $("#bathrooms_list");
 					for(var bathroomIndex in building.bathrooms) {

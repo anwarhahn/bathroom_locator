@@ -82,5 +82,13 @@ class Data {
 		$this->refresh($sql_query);
 		return $this->array;
 	}
+
+	function getFilter() {
+		foreach ($_GET as $key => $value) {
+			echo $key."=>".$value."\n";
+		}
+		
+		return array();
+	}
 }
 ?>

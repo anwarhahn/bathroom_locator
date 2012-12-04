@@ -6,8 +6,8 @@
 			require("header.php");
 			include("../db/data.php");
 			$db = new Data();
-			$properties = array();
-			$buildings = $db->all_buildings_that_match($properties);
+			$filter = $db->getFilter();
+			$buildings = $db->all_buildings_that_match($filter);
 			$data = $db->all_json($buildings);
 		?>
 
