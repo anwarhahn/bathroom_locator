@@ -74,14 +74,16 @@ class Data {
 		$handicap_result = mysql_query($handicap_query);
 		$handicap_count = 0;
 		if ($handicap_result) {
-			$handicap_count = intval(mysql_fetch_assoc($handicap_result)['count(*)']);
+			$vari = mysql_fetch_assoc($handicap_result);
+			$handicap_count = intval($vari["count(*)"]);
 		}
 
 		$male_query = "select count(*) from Bathrooms where Building_Number='{$id}' and (Gender='UNISEX' or Gender='MENS')";
 		$male_result = mysql_query($male_query);
 		$male_count = 0;
 		if ($male_result) {
-			$male_count = intval(mysql_fetch_assoc($male_result)['count(*)']);
+			$vari = mysql_fetch_assoc($male_result);
+			$male_count = intval($vari['count(*)']);
 		}
 
 
@@ -89,7 +91,8 @@ class Data {
 		$female_result = mysql_query($female_query);
 		$female_count = 0;
 		if ($female_result) {
-			$female_count = intval(mysql_fetch_assoc($female_result)['count(*)']);
+			$vari = mysql_fetch_assoc($female_result);
+			$female_count = intval($vari['count(*)']);
 		}
 
 		

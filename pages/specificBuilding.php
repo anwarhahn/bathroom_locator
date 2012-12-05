@@ -102,7 +102,7 @@
 						<li>
 							<div id="address_goes_here"></div>
 							<div>
-								<a id='show_link' data-mini='true' data-inline='true' data-role='button' href='#' >Show on map</a>
+								<a id='show_link' rel="external" data-mini='true' data-inline='true' data-role='button' href='#' >Show on map</a>
 							</div>
 						</li>
 					</ul>
