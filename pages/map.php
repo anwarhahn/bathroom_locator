@@ -9,6 +9,14 @@
 			$db = new Data();
 			$filter = $db->getFilter();
 			$buildings = $db->all_buildings_that_match($filter);
+			for ($i = 0; $i < count($buildings); $i++) {
+				//echo var_dump($buildings[$i]);
+				$specific_counts = $db->count_features($buildings[$i]["Building_Name"], $buildings[$i]["Building_Number"]);
+				$buildings[$i]['male_count'] = $specific_counts['male'];
+				$buildings[$i]['female_count'] = $specific_counts['female'];
+				$buildings[$i]['handicap_count'] = $specific_counts['handicap'];
+				//echo var_dump($buildings[$i]);
+			}
 			$data = $db->all_json($buildings);
 		?>
 	</head>

@@ -10,7 +10,7 @@ MarkerManager.prototype.addMarkersFromJSON = function(json)
 	for (var arrayPos in json) {
 		var elem = json[arrayPos];
 		var latLng = this.makeLatLng(elem.Latitude, elem.Longitude);
-		this.addMarker(latLng, elem.Building_Name, elem.Building_Number);
+		this.addMarker(latLng, elem);
 	}
 }
 
@@ -19,35 +19,36 @@ MarkerManager.prototype.makeLatLng = function(latitude, longitude)
 	return new google.maps.LatLng(latitude, longitude);
 }
 
-MarkerManager.prototype.addMarker = function(latLng, name, id)
+MarkerManager.prototype.addMarker = function(latLng, elem)
 {
+
+	var id = elem.Building_Number;
 	var obj = this;
 	var marker = new google.maps.Marker({
 						map: obj.map,
-						title: name,
+						title: elem.Building_Name,
 						position: latLng,
 						visible: true,
 						clickable: true,
 						icon: "../assets/images/blue.png"
 						});
+	
 	var popup = function() {
-		var button = document.createElement("button");
-		button.innerHTML = ">";
-		button.onclick = function(evt) {
-			//var query = ["bathroom_id=" + escape(id), "origin=" + escape("map")];
-			//window.location = "specificBathroom.php?" + query.toString().replace(',', '&');
-			window.location = "specificBuilding.php" + query_string(old_params(), {origin:"map", Building_Number:id});
-		}
-		/*
-		var button = document.createElement("a");
-		button.setAttribute("data-role", "button");
-		button.setAttribute("data-icon", "arrow-r");
-		button.innerHTML = ">";
-		button.href = "specificBathroom.php" + query_string(old_params(), {origin:"map", bathroom_id:id});
-		*/
+		var male = "<td class='man_icon_building' class = 'icons'></td>";
+		var female = "<td class='woman_icon_building' class = 'icons'></td>";
+
+		var gender = "";
+		if (elem.male_count > 0) gender += male;
+		if (elem.female_count > 0) gender += female;
+	
+		var handicap = "";
+		if (elem.handicap_count > 0) handicap = "<td class='handicap_icon_building' class = 'icons'><td>";
+
+		var name_link = "<a href='specificBuilding.php"+query_string(old_params(), {origin:"map", Building_Number:elem.Building_Number})+"'>"+elem.Building_Name+"</a>";
+		var icons = "<table><tr><th>"+name_link+"</th></tr><tr>" + gender + handicap + "</tr></table>";
+
 		var p = document.createElement("p");
-		p.innerHTML = name + " ";
-		p.appendChild(button);
+		p.innerHTML = icons;
 		var infoWindowOptions = {
 			content: p
 		}

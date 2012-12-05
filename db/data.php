@@ -9,6 +9,7 @@ class Data {
 	private $query_all = "select * from bathrooms";
 	private $query = "select * from bathrooms";
 	private $num_rows = 0;
+	private $counts = array();
 
 	function __construct() {
 		//do nothing
@@ -65,6 +66,42 @@ class Data {
 		return $this->num_rows;
 	}
 
+	function count_features($name, $id) {
+		$keyExists = array_key_exists($id, $this->counts);
+		if ($keyExists) return $this->counts[$id];
+
+		$handicap_query = "select count(*) from Bathrooms where Building_Number='{$id}' and Handicap='1'";
+		$handicap_result = mysql_query($handicap_query);
+		$handicap_count = 0;
+		if ($handicap_result) {
+			$handicap_count = intval(mysql_fetch_assoc($handicap_result)['count(*)']);
+		}
+
+		$male_query = "select count(*) from Bathrooms where Building_Number='{$id}' and (Gender='UNISEX' or Gender='MENS')";
+		$male_result = mysql_query($male_query);
+		$male_count = 0;
+		if ($male_result) {
+			$male_count = intval(mysql_fetch_assoc($male_result)['count(*)']);
+		}
+
+
+		$female_query = "select count(*) from Bathrooms where Building_Number='{$id}' and (Gender='UNISEX' or Gender='WOMENS')";
+		$female_result = mysql_query($female_query);
+		$female_count = 0;
+		if ($female_result) {
+			$female_count = intval(mysql_fetch_assoc($female_result)['count(*)']);
+		}
+
+		
+		$specific_counts = array();
+		$specific_counts["handicap"] = $handicap_count;
+		$specific_counts["male"] = $male_count;
+		$specific_counts["female"] = $female_count;
+				
+		$this->counts[$id] = $specific_counts;
+		return $specific_counts;
+	}
+
 	function all_buildings_that_match($properties) {
 		$sql_query = "select distinct Buildings.Building_Number, Buildings.Building_Name, Buildings.Address, Buildings.Latitude, Buildings.Longitude from Buildings";
 		if (count($properties) > 0) {
@@ -74,7 +111,7 @@ class Data {
 			$isfemale = array_key_exists("female", $properties);
 			$ishandicap = array_key_exists("handicap", $properties);
 
-			echo var_dump($properties);
+			//echo var_dump($properties);
 
 			if ($isfemale && $ismale) {
 				// don't constrain gender
@@ -102,7 +139,7 @@ class Data {
 
 		}
 
-		echo $sql_query;
+		//echo $sql_query;
 		$this->refresh($sql_query);
 		return $this->array;
 	}
