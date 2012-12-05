@@ -89,7 +89,11 @@ class Data {
 				$constraints[] = "Bathrooms.Handicap='1'";
 			}
 			$constraints[] = "Buildings.Building_Number=Bathrooms.Building_Number";
-			$sql_query .= implode(" and ", $constraints);
+
+			if (count($constraints) > 1)
+				$sql_query .= implode(" and ", $constraints);
+			else
+				$sql_query .= $constraints[0];
 		}
 		//echo $sql_query;
 		$this->refresh($sql_query);
