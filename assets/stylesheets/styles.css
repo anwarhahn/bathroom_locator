@@ -42,8 +42,32 @@ body {
 }
 
 .icons {
-    height: 15px;
+    height:45px;
 }
+.woman_icon_building{
+    float: left;
+    width: 45px;
+    height: 45px;
+    background: url(woman-icon.png) 50% 50% no-repeat;
+    background-size: 47px 47px;
+}
+.man_icon_building{
+    float: left;
+    width: 45px;
+    height: 45px;
+    background: url(man-icon.png) 50% 50% no-repeat;
+    background-size: 44px 44px;
+}
+.handicap_icon_building{
+    float: left;
+    width: 45px;
+    height: 45px;
+    background: url(handicap-icon.png) 50% 50% no-repeat;
+    background-size: 47px 47px;
+}
+
+
+
 .woman_icon_help{
     float: left;
     width: 30px;

@@ -20,7 +20,7 @@
 				function success(position) { 
 					var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 				  	var myOptions = {
-				    	zoom: 16,
+				    	zoom: 18,
 				    	center: latlng,
 				    	zoomControl: true,
 						panControl: true,
@@ -33,7 +33,7 @@
 					var stanfordLatLng = new google.maps.LatLng(37.428729,-122.171329);
 					var mapOptions = {
 						center: stanfordLatLng,
-						zoom: 16,
+						zoom: 18,
 						zoomControl: true,
 						panControl: true,
 						mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -99,7 +99,7 @@
 					var footer = $("#footerlist").height();
 					$(".map_canvas").height(document.height - header - footer - 42);
 					if (navigator.geolocation) {
-						navigator.geolocation.getCurrentPosition(notsuccess, notsuccess);
+						navigator.geolocation.getCurrentPosition(success, notsuccess);
 					} else {
 						notsuccess();
 					}
