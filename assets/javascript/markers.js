@@ -37,20 +37,20 @@ MarkerManager.prototype.addMarker = function(latLng, elem)
 		var male = "<td class='man_icon_building' class = 'icons'></td>";
 		var female = "<td class='woman_icon_building' class = 'icons'></td>";
 
-		var gender = "";
-		if (elem.male_count > 0) gender += male;
-		if (elem.female_count > 0) gender += female;
-	
-		var handicap = "";
-		if (elem.handicap_count > 0) handicap = "<td class='handicap_icon_building' class = 'icons'><td>";
+		var maleCol = "";
+		var femaleCol = "";
+		var handicapCol = "";
+		if (elem.male_count > 0) maleCol = "<td class='man_icon_popup' class = 'icons'></td><td>"+elem.male_count+"</td>";
+		if (elem.female_count > 0) femaleCol = "<td class='woman_icon_popup' class = 'icons'></td><td>"+elem.female_count+"</td>";
+		if (elem.handicap_count > 0) handicapCol = "<td class='handicap_icon_popup' class = 'icons'><td><td>"+elem.handicap_count+"</td>";
 
 		var name_link = "<a href='specificBuilding.php"+query_string(old_params(), {origin:"map", Building_Number:elem.Building_Number})+"'>"+elem.Building_Name+"</a>";
-		var icons = "<table><tr><th>"+name_link+"</th></tr><tr>" + gender + handicap + "</tr></table>";
+		
+		var handicapRow = ""
+		var table = "<p>"+name_link+"<table><tr>" + maleCol + femaleCol + handicapCol + "</tr></table></p>";
 
-		var p = document.createElement("p");
-		p.innerHTML = icons;
 		var infoWindowOptions = {
-			content: p
+			content: table
 		}
 		var infoWindow = new google.maps.InfoWindow(infoWindowOptions);
 		obj.openInfoWindow(infoWindow, marker);

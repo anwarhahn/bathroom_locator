@@ -44,6 +44,30 @@ body {
 .icons {
     height:45px;
 }
+
+.woman_icon_popup {
+    float: left;
+    width: 25px;
+    height: 25px;
+    background: url(woman-icon.png) 50% 50% no-repeat;
+    background-size: 27px 27px;
+}
+.man_icon_popup {
+    float: left;
+    width: 25px;
+    height: 25px;
+    background: url(man-icon.png) 50% 50% no-repeat;
+    background-size: 24px 24px;
+}
+.handicap_icon_popup {
+    float: left;
+    width: 25px;
+    height: 25px;
+    background: url(handicap-icon.png) 50% 50% no-repeat;
+    background-size: 27px 27px;
+}
+
+
 .woman_icon_building{
     float: left;
     width: 45px;
